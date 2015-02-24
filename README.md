@@ -4,17 +4,20 @@ This package adds some sophisticated scraping utilities to your meteor app. You 
 HTML sites or RSS/Atom-Feeds and get a nicely detailed result object back. A few features, built on top of
 excellent NPM modules:
 
-- Encoding autocorrection: Don't worry for non-UTF-8 sources, they'll get [detected](https://github.com/runk/node-chardet) and [converted](https://github.com/ashtuchkin/iconv-lite)
-- Follows the Google Ajax Specification, thus can scrape dynamic pages (as long as google could do it, too)
-- [Language Detection](https://github.com/wooorm/franc)
-- Summarization: extracted text content on websites comes in different flavors:
+- **Encoding autocorrection**: Don't worry for non-UTF-8 sources, they'll get [detected](https://github.com/runk/node-chardet) and [converted](https://github.com/ashtuchkin/iconv-lite)
+
+- Follows the **Google Ajax Specification***, thus can scrape dynamic pages (as long as google could do it, too)
+
+- **[Language Detection](https://github.com/wooorm/franc)**
+
+- **Summarization**: extracted text content on websites comes in different flavors:
   - [Title](https://github.com/sindresorhus/article-title): the determined headline
-  - [Teaser](https://www.npmjs.com/package/teaser): a four-sentence summary of the content of this page
-  - [Summary](https://www.npmjs.com/package/summarizely): The most important sentences of the whole text
-  - [fulltext](https://www.npmjs.com/package/readabilitySAX): The complete *text* of the Website
-- fast and sophisticated [tagging](https://github.com/Anonyfox/meteor-tags)
-- detection of RSS/Atom feeds on websites
-- RSS/Atom feed parsing and item optimization
+  - Description: can be a [a four-sentence summary of the content of this page](https://www.npmjs.com/package/teaser) or [The most important sentences of the whole text](https://www.npmjs.com/package/summarizely) or handpicked from meta tags
+  - **[fulltext](https://www.npmjs.com/package/readabilitySAX)**: The complete *text* of the Website (think of instapaper, pocket or readability)
+
+- fast and sophisticated **[tagging](https://github.com/Anonyfox/meteor-tags)**
+
+- **RSS/Atom feed parsing** and item optimization
 
 ## Installation
 
@@ -25,13 +28,17 @@ excellent NPM modules:
 Works on the server with an easy API:
 
 `data = Scrape.website "http://example.com/article" # for websites and articles`
+
 `data = Scrape.feed "http://example.com/rss.xml" # for RSS/Atom feeds`
+
 `data = Scrape.url "http://example.com/" # for anything else, plain HTML`
 
 or on the Client **(client support still in progress, doesn't work for now.)**
 
 `Scrape.website "http://example.com/article", (error, data) -> console.log data`
+
 `Scrape.feed "http://example.com/article", (error, data) -> console.log data`
+
 `Scrape.feed "http://example.com/", (error, data) -> console.log data`
 
 ## Responses

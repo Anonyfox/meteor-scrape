@@ -1,10 +1,8 @@
 Package.describe({
   name: 'anonyfox:scrape',
   version: '0.0.1',
-  // Brief, one-line summary of the package.
-  summary: 'Sophisticated scraping utilities for your meteor app. Works for websites and RSS/Atom feeds.',
-  // URL to the Git repository containing the source code for this package.
-  git: '',
+  summary: 'Scrape any Website or RSS/Atom-Feed with ease',
+  git: 'https://github.com/Anonyfox/meteor-scrape',
   documentation: 'README.md'
 });
 
@@ -53,6 +51,6 @@ Package.onTest(function(api) {
     'coffeescript',
     'underscore',
   ],['client','server']);
-  api.use('anonyfox:scrape@0.0.1');
+  api.use('anonyfox:scrape');
   api.addFiles('test.coffee.md');
 });
