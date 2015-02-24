@@ -21,6 +21,12 @@ This module uses the same API on the client and the server and has two modes:
           return obj
         catch e
           return {}
+      url: (url) ->
+        try
+          data = ScrapeRequest.fetch url
+          return data
+        catch e
+          return ""
 
 For communication between client and server, the following Methods are required:
 

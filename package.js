@@ -1,6 +1,6 @@
 Package.describe({
   name: 'anonyfox:scrape',
-  version: '0.0.1',
+  version: '0.0.2',
   summary: 'Scrape any Website or RSS/Atom-Feed with ease',
   git: 'https://github.com/Anonyfox/meteor-scrape',
   documentation: 'README.md'
@@ -26,9 +26,9 @@ Package.onUse(function(api) {
     'coffeescript',
     'underscore',
     'url',
-    'froatsnook:request',
+    'froatsnook:request@2.53.2',
     'anonyfox:tags@0.0.13',
-    'wizonesolutions:underscore-string'
+    'wizonesolutions:underscore-string@1.0.0'
     // 'numtel:phantomjs-persistent-server'
   ],['server']);
   api.export(['Scrape'],['client','server']);
