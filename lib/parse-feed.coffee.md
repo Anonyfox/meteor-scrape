@@ -5,8 +5,10 @@ HTML string and you're ready to go. The following libraries are used for this:
     cheerio = Npm.require "cheerio"
     franc = Npm.require "franc"
 
-Instead of real XML parsing, just use cheerio for this task, this way efficient
-CSS3 selectorss can be used instead of nasty XPaths or fragile RegExps!
+Instead of "real" XML handling, just use
+[cheerio](https://github.com/cheeriojs/cheerio) for this task, this way
+efficient CSS3 selectorss can be used instead of nasty XPaths or
+fragile RegExps!
 
     @ParseFeed =
       run: (xml) ->
@@ -20,8 +22,8 @@ relevant data.
     mapItem = (item) ->
       $ = cheerio.load item, xmlMode: true
       data = {}
-      data.title = _(Text.clean $("title").first().text() or "").prune 100
-      data.description = _(Text.clean $("summary,description").first().text() or "").prune 1000
+      data.title = Text.clean $("title").first().text() or ""
+      data.description = Text.clean $("summary,description").first().text() or ""
       data.language = franc "#{data.title} #{data.description}"
       data.link = $("link").first().attr("href") or $("link").first().text()
       data.pubDate = findPubDate $
@@ -29,18 +31,14 @@ relevant data.
       tags = $("category,categories").map((i,e) -> $(e).text()).get()
       moreTags = Tags.findFrom "#{data.title} #{data.description}"
       data.tags = _.union tags, moreTags
-      # console.log data.title, data.tags
       return data
 
 The following helper functions are used by the mapItem function, for data
 that is nontrivial to parse.
 
     findImage = ($) ->
-      # example: http://venturebeat.com/
       image = $("enclosure").attr("url")
-      # example: http://www.n24.de/n24/
       image or= $('media\\:content, media\\:thumbnail, content').attr("url")
-      # prio 1: find in content via unescaped html scan again
       unless image
         str = $('media\\:content, content\\:encoded, content').html()
         image = str?.match(/\ssrc=["']*(([^'"\s]+)\.(jpe?g)|(png))["'\s]/)?[1]

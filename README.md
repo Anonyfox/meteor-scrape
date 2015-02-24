@@ -5,19 +5,16 @@ HTML sites or RSS/Atom-Feeds and get a nicely detailed result object back. A few
 excellent NPM modules:
 
 - **Encoding autocorrection**: Don't worry for non-UTF-8 sources, they'll get [detected](https://github.com/runk/node-chardet) and [converted](https://github.com/ashtuchkin/iconv-lite)
-
 - Follows the **Google Ajax Specification***, thus can scrape dynamic pages (as long as google could do it, too)
-
 - **[Language Detection](https://github.com/wooorm/franc)**
-
 - **Summarization**: extracted text content on websites comes in different flavors:
   - [Title](https://github.com/sindresorhus/article-title): the determined headline
   - Description: can be a [a four-sentence summary of the content of this page](https://www.npmjs.com/package/teaser) or [The most important sentences of the whole text](https://www.npmjs.com/package/summarizely) or handpicked from meta tags
   - **[fulltext](https://www.npmjs.com/package/readabilitySAX)**: The complete *text* of the Website (think of instapaper, pocket or readability)
-
 - fast and sophisticated **[tagging](https://github.com/Anonyfox/meteor-tags)**
-
-- **RSS/Atom feed parsing** and item optimization
+- **RSS/Atom feed parsing** and item optimization:
+  - Tries hard to find an acceptable image
+  - Tags the content directly
 
 ## Installation
 

@@ -5,8 +5,6 @@ detection & correction of encodings. The following external libraries are used:
 
     chardet = Npm.require 'chardet'
     iconv = Npm.require 'iconv-lite'
-    # phantomExec = phantomLaunch()
-
 
 The configuration for [request ](https://github.com/request/request) looks like this:
 
@@ -18,7 +16,9 @@ The configuration for [request ](https://github.com/request/request) looks like 
       followAllRedirects: true
 
 The API of this module is a single method, since it doesn't matter if you are
-requesting a website or a feed.
+requesting a website or a feed. Implements the
+[Google AJAX Specification](https://developers.google.com/webmasters/ajax-crawling/)
+to crawl dynamic pages. This needs a second HTTP request when necessary.
 
     @ScrapeRequest =
       fetch: (url) ->
@@ -29,6 +29,8 @@ requesting a website or a feed.
           return html
         catch e
           return null
+
+Request the target URL and correct the encoding to UTF-8
 
     fetch = (url) ->
       result = request.getSync url, options

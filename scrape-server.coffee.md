@@ -1,7 +1,9 @@
-# Scrape
+# Scrape (Server)
 
 This module uses the same API on the client and the server and has two modes:
-  *websites* and *feeds*. Either way, it consumes an URL and returns an object.
+*websites* and *feeds*. Either way, it consumes an URL and returns an object.
+Additionally, there is an *url()* method that returns the plain response text
+without any further parsing
 
     @Scrape =
       website: (url) ->
@@ -17,7 +19,6 @@ This module uses the same API on the client and the server and has two modes:
           xml = ScrapeRequest.fetch url
           data = ParseFeed.run xml
           obj = correctFeedItems url, data
-          # console.log obj
           return obj
         catch e
           return {}

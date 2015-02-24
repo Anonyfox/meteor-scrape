@@ -10,7 +10,6 @@ Npm.depends({
   "request": "2.53.0",
   "chardet": "0.0.8",
   "iconv-lite": "0.4.3",
-  // "unfluff": "0.10.0",
   "franc": "0.7.1",
   "article-title": "1.0.1",
   "teaser": "0.1.1",
@@ -29,7 +28,6 @@ Package.onUse(function(api) {
     'froatsnook:request@2.53.2',
     'anonyfox:tags@0.0.13',
     'wizonesolutions:underscore-string@1.0.0'
-    // 'numtel:phantomjs-persistent-server'
   ],['server']);
   api.export(['Scrape'],['client','server']);
   // api.export(['ScrapeClient'],['client']);

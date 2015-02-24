@@ -2,7 +2,6 @@
 This core module takes an HTML string and returns a proper data object. The
 following NPM modules are used:
 
-    # unfluff = Npm.require "unfluff" # not used currently
     franc = Npm.require "franc"
     articleTitle = Npm.require "article-title"
     teaser = Npm.require "teaser"
@@ -10,8 +9,7 @@ following NPM modules are used:
     cheerio = Npm.require "cheerio"
     readability = Npm.require "readabilitySAX"
 
-The API of this module includes a central `run()` method, and several small
-helper methods for better testing and readability.
+The API of this module includes a central `run()` method.
 
     @ParseWebsite = share.ParseWebsite =
       run: (html) ->
@@ -19,15 +17,7 @@ helper methods for better testing and readability.
         dom = extractFromDOM html
         mergeResults txt, dom
 
-## Extract the raw data using some NPM modules
-
-- [readability](https://www.npmjs.com/package/readabilitySAX) get the page text
-- [franc](https://www.npmjs.com/package/franc) language detection
-- [article-title](https://www.npmjs.com/package/article-title) title selector
-- [teaser](https://www.npmjs.com/package/teaser) snippet
-- [Summary](https://github.com/jbrooksuk/node-summary): TL;DR
-
-In conjunction, these modules should be able to deliver a good starting point.
+## Extract the raw data from the plaintext and analyze it
 
     extractFromText = (html) ->
       data = {}
@@ -129,10 +119,10 @@ result object. Pick the best results if there is some overlap.
 
     mergeResults = (txt, dom) ->
       data = {}
-      data.title = _(Text.clean(txt.title or dom.title)).prune 100
-      data.text = Text.clean(txt.text or dom.text)
+      data.title = Text.clean txt.title or dom.title
+      data.text = Text.clean txt.text or dom.text
       data.lang = txt.lang
-      data.description = _(Text.clean(dom.description or txt.teaser?.join(" ") or txt.summary)).prune 1000
+      data.description = Text.clean dom.description or txt.teaser?.join(" ") or txt.summary
       data.favicon = dom.favicon
       data.references = dom.references
       data.image = dom.image

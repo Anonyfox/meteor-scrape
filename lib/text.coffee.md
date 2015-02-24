@@ -2,10 +2,10 @@
 
 This helper module offers a variety of text optimizing utilities, for example
 the removal of common artifacts or the un-escaping of HTML characters.
-In addition, it is capable of finding the ajax meta tag (as declared in the )
+
+In addition, it is capable of finding the ajax meta tag (as declared in the
 Google AJAX specification). IF it exists, it must be of the form:
 `<meta name="fragment" content="!">`.
-
 
     cheerio = Npm.require "cheerio"
 
@@ -27,5 +27,6 @@ returns a string:
     rmHTML = (str) ->
       _(_(str).unescapeHTML()).stripTags()
 
+    # whitespace
     rmSpace = (str) ->
       _(str).clean()
