@@ -24,7 +24,9 @@ relevant data.
       data = {}
       data.title = Text.clean $("title").first().text() or ""
       data.description = Text.clean $("summary,description").first().text() or ""
-      data.language = franc "#{data.title} #{data.description}"
+      data.language = franc "#{data.title} #{data.description}", whitelist: [
+        "deu","eng","spa","pol","ita","por","nld","ukr","jpn","swh","und"
+      ]
       data.link = $("link").first().attr("href") or $("link").first().text()
       data.pubDate = findPubDate $
       data.image = findImage $

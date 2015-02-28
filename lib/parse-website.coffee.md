@@ -128,5 +128,7 @@ result object. Pick the best results if there is some overlap.
       data.image = dom.image
       data.feeds = dom.feeds
       data.tags = Tags.clean _.union dom.tags, txt.tags
-      data.lang = franc "#{data.title} #{data.text}"
+      data.lang = franc "#{data.title} #{data.text}", whitelist: [
+        "deu","eng","spa","pol","ita","por","nld","ukr","jpn","swh","und"
+      ]
       return data
