@@ -26,6 +26,13 @@ returns a string:
     # HTML & entities
     rmHTML = (str) ->
       _(_(str).unescapeHTML()).stripTags()
+        .replace /&auml;/g, "ä"
+        .replace /&ouml;/g, "ö"
+        .replace /&uuml;/g, "ü"
+        .replace /&Auml;/g, "Ä"
+        .replace /&Ouml;/g, "Ö"
+        .replace /&Uuml;/g, "Ü"
+        .replace /&szlig;/g, "ß"
 
     # whitespace
     rmSpace = (str) ->

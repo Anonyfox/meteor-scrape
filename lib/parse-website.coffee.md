@@ -8,6 +8,7 @@ following NPM modules are used:
     summarize = Npm.require "summarizely"
     cheerio = Npm.require "cheerio"
     readability = Npm.require "readabilitySAX"
+    unfluff = Npm.require "unfluff"
 
 The API of this module includes a central `run()` method.
 
@@ -21,16 +22,23 @@ The API of this module includes a central `run()` method.
 
     extractFromText = (html) ->
       data = {}
+      extract = unfluff.lazy html
       data.title = articleTitle html
-      data.text = readability.process(html, {type: "text"}).text
-      data.text = "" if /^under\s100\scharacters/i.test data.text
-      data.text = "" if data.text.length < 50
+      data.title or= extract.title()
+      data.title or= html.match(/<title>([^<])*<\/title>/i)[0]
+      data.text = extract.text()
+      data.text or= extract.description()
+      data.text or= readability.process(html, {type: "text"}).text
+      data.text = "" unless data.text?.length > 50
       # NOTE: readability also finds the "next" page for paginated articles!
       # --> ToDo: follow the NEXT-pages and join all to one article!
-      data.tags = Tags.findFrom "#{data.title} #{data.text}"
-      data.teaser = new teaser(data).summarize() if data.text.length > 100
+      data.teaser = extract.description()
+      data.teaser or= new teaser(data).summarize()
       data.teaser or= ""
-      data.summary = summarize(data.text).join("\n")
+      data.summary = extract.description()
+      data.summary or= summarize(data.text).join("\n")
+      data.tags = Tags.findFrom "#{data.title} #{data.text}"
+      data.tags = _.union data.tags, extract.tags()
       return data
 
 ## DOM Parsing
@@ -110,7 +118,7 @@ of nasty XPaths or unreadable RegExps.
       if Link.test url then url else ""
 
     findTitle = ($) ->
-      $("title,h1").first().text()
+      $("title,h1,2h,h3,h4,h5,h6").first().text()
 
 ## Merge the results
 
@@ -119,7 +127,7 @@ result object. Pick the best results if there is some overlap.
 
     mergeResults = (txt, dom) ->
       data = {}
-      data.title = Text.clean txt.title or dom.title
+      data.title = Text.clean(txt.title or dom.title)
       data.text = Text.clean txt.text or dom.text
       data.lang = txt.lang
       data.description = Text.clean dom.description or txt.teaser?.join(" ") or txt.summary

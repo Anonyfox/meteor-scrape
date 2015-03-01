@@ -34,13 +34,14 @@ Run the following example pages. Everyone of them must work under any circumstan
 
     scrapeWebsiteTest "http://en.wikipedia.org/wiki/Meteor_%28web_framework%29"#, (test, data) -> console.log data
     scrapeWebsiteTest "http://www.golem.de/news/raspberry-pi-2-die-feierabend-maschine-1502-112365.html"
-    scrapeWebsiteTest "http://blog.fefe.de/?ts=aa19b67e"
+    scrapeWebsiteTest "http://blog.fefe.de/?ts=aa0e3af6"#, (test, data) -> console.log data
     scrapeWebsiteTest "http://www.bbc.com/news/technology-31565368"#, (test, data) -> console.log data
     scrapeWebsiteTest "http://lifehacker.com/thermos-controls-your-nest-from-os-x-s-notification-cen-1673279696"
     scrapeWebsiteTest "http://www.bunte.de/schweden/estelle-von-schweden-hinter-den-kulissen-der-ski-wm-117174.html"
     scrapeWebsiteTest "https://twitter.com/meteorjs/status/542422624995778564"#, (test, data) ->      # console.log data
     scrapeWebsiteTest "http://www.annabelle.ch/shopping/produkte/burberry-london-37150"#, (test, data) ->
     scrapeWebsiteTest "https://www.meteor.com/blog/2015/01/20/meteor-show"#, (test, data) ->
+    scrapeWebsiteTest "http://www.nachrichten.at/nachrichten/wirtschaft/Briten-blockieren-Verkauf-von-Oelfeldern-an-Russen;art15,1670166#ref=rss", (test, data) -> console.log data
 
 
     scrapeFeedTest = (url, fn) ->

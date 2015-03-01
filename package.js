@@ -1,6 +1,6 @@
 Package.describe({
   name: 'anonyfox:scrape',
-  version: '0.0.4',
+  version: '0.0.5',
   summary: 'Scrape any Website or RSS/Atom-Feed with ease',
   git: 'https://github.com/Anonyfox/meteor-scrape',
   documentation: 'README.md'
@@ -16,7 +16,8 @@ Npm.depends({
   "summarizely": "0.0.2",
   "cheerio": "0.18.0",
   "readabilitySAX": "1.6.1",
-  "is-url": "1.2.0"
+  "is-url": "1.2.0",
+  "unfluff": "0.10.0"
 });
 
 Package.onUse(function(api) {
