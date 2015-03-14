@@ -15,13 +15,13 @@ without any further parsing
         catch e
           return {}
       feed: (url) ->
-        #try
-        xml = ScrapeRequest.fetch url
-        data = ParseFeed.run xml
-        obj = correctFeedItems url, data
-        return obj
-        #catch e
-         # return {}
+        try
+          xml = ScrapeRequest.fetch url
+          data = ParseFeed.run xml
+          obj = correctFeedItems url, data
+          return obj
+        catch e
+          return {}
       url: (url) ->
         try
           data = ScrapeRequest.fetch url
