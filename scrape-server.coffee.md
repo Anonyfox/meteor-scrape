@@ -15,13 +15,13 @@ without any further parsing
         catch e
           return {}
       feed: (url) ->
-        try
-          xml = ScrapeRequest.fetch url
-          data = ParseFeed.run xml
-          obj = correctFeedItems url, data
-          return obj
-        catch e
-          return {}
+        #try
+        xml = ScrapeRequest.fetch url
+        data = ParseFeed.run xml
+        obj = correctFeedItems url, data
+        return obj
+        #catch e
+         # return {}
       url: (url) ->
         try
           data = ScrapeRequest.fetch url
@@ -51,7 +51,9 @@ the transformation from any type of link to a clean absolute url.
       obj.references = _.map obj.references, (r) -> Link.join url, r
       obj.domain = Link.domain url
       obj.url = if obj.url then obj.url else url
-      obj.tags = Tags.clean obj.tags, Link.brands url
+      rx = _.map Link.brands(url), (e) -> new RegExp(e, "i") 
+      obj.tags = _.reject Yaki(obj.tags).clean().convert(), (tag) ->
+        _.some (r.test tag for r in rx)
       obj.references = _.uniq _.filter obj.references, (r) ->
         Link.domain(r) isnt Link.domain(url)
       return obj
@@ -63,6 +65,8 @@ the transformation from any type of link to a clean absolute url.
         i = _.clone item
         i.link = Link.join url, i.link
         i.image = if i.image then Link.join url, i.image else ""
-        i.tags = Tags.clean i.tags, Link.brands url
+        rx = _.map Link.brands(url), (e) -> new RegExp(e, "i") 
+        i.tags = _.reject Yaki(i.tags).clean().convert(), (tag) ->
+          _.some (r.test tag for r in rx)
         obj.items.push i
       return obj

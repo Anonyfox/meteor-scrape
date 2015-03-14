@@ -31,7 +31,8 @@ relevant data.
       data.pubDate = findPubDate $
       data.image = findImage $
       tags = $("category,categories").map((i,e) -> $(e).text()).get()
-      moreTags = Tags.findFrom "#{data.title} #{data.description}"
+      lang = if data.language is 'deu' then 'de' else 'en'
+      moreTags = Yaki.analyse("#{data.title} #{data.description}", language: lang)
       data.tags = _.union tags, moreTags
       return data
 

@@ -37,8 +37,8 @@ The API of this module includes a central `run()` method.
       data.teaser or= ""
       data.summary = extract.description()
       data.summary or= summarize(data.text).join("\n")
-      data.tags = Tags.findFrom "#{data.title} #{data.text}"
-      data.tags = _.union data.tags, extract.tags()
+      data.tags = Yaki.analyse("#{data.title} #{data.text}")
+      data.tags = _.union data.tags, Yaki(extract.tags()).clean().convert()
       return data
 
 ## DOM Parsing
@@ -85,8 +85,8 @@ of nasty XPaths or unreadable RegExps.
       str = $("meta[name='keywords']").attr("content")
       tags = []
       if str
-        ary = if /;/.test str then str.split(";") else str.split(",")
-        tags = _.uniq _.compact ary.map((s) -> s.trim().toLowerCase())
+        tags = if /;/.test str then str.split ';' else str.split ','
+        tags = Yaki(tags).clean().convert()
       return tags
 
     findReferences = ($) ->
@@ -118,7 +118,7 @@ of nasty XPaths or unreadable RegExps.
       if Link.test url then url else ""
 
     findTitle = ($) ->
-      $("title,h1,2h,h3,h4,h5,h6").first().text()
+      $("title,h1,h2,h3,h4,h5,h6").first().text()
 
 ## Merge the results
 
@@ -135,7 +135,7 @@ result object. Pick the best results if there is some overlap.
       data.references = dom.references
       data.image = dom.image
       data.feeds = dom.feeds
-      data.tags = Tags.clean _.union dom.tags, txt.tags
+      data.tags = _.union dom.tags, txt.tags
       data.lang = franc "#{data.title} #{data.text}", whitelist: [
         "deu","eng","spa","pol","ita","por","nld","ukr","jpn","swh","und"
       ]

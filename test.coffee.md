@@ -56,7 +56,7 @@ Run the following example pages. Everyone of them must work under any circumstan
           fn? test, data
 
     scrapeFeedTest "http://blog.fefe.de/rss.xml"
-    scrapeFeedTest "http://www.n-tv.de/rss"#, (test, data) -> console.log data.items[0]
+    scrapeFeedTest "http://www.n-tv.de/rss", (test, data) -> console.log data.items[0]
     scrapeFeedTest "http://www.spiegel.de/schlagzeilen/index.rss"
     scrapeFeedTest "https://www.meteor.com/blog/atom.xml"#, (test, data) -> console.log data.items
     scrapeFeedTest "http://feeds.venturebeat.com/VentureBeat"#, (test, data) -> console.log data.items

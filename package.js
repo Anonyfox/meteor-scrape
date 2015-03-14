@@ -27,7 +27,7 @@ Package.onUse(function(api) {
     'underscore',
     'url',
     'froatsnook:request@2.53.2',
-    'anonyfox:tags@0.0.13',
+    'nefiltari:yaki@0.0.3',
     'wizonesolutions:underscore-string@1.0.0'
   ],['server']);
   api.export(['Scrape'],['client','server']);

@@ -33,7 +33,7 @@ Some helpers are nontrivial (or at least, don't fit well in a one-liner):
     brands = (link) ->
       u = url.parse link
       words = _.filter u.hostname.split("."), (w) -> w.length > 3
-      Tags.clean words
+      Yaki(words).clean().convert()
 
     ajaxified = (link) ->
       u = url.parse link
