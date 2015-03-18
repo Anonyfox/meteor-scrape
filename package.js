@@ -1,6 +1,6 @@
 Package.describe({
   name: 'anonyfox:scrape',
-  version: '0.0.5',
+  version: '0.0.6',
   summary: 'Scrape any Website or RSS/Atom-Feed with ease',
   git: 'https://github.com/Anonyfox/meteor-scrape',
   documentation: 'README.md'
@@ -16,8 +16,7 @@ Npm.depends({
   "summarizely": "0.0.2",
   "cheerio": "0.18.0",
   "readabilitySAX": "1.6.1",
-  "is-url": "1.2.0",
-  "unfluff": "0.10.0"
+  "is-url": "1.2.0"
 });
 
 Package.onUse(function(api) {
@@ -27,7 +26,7 @@ Package.onUse(function(api) {
     'underscore',
     'url',
     'froatsnook:request@2.53.2',
-    'nefiltari:yaki@0.0.3',
+    'nefiltari:yaki@0.0.7',
     'wizonesolutions:underscore-string@1.0.0'
   ],['server']);
   api.export(['Scrape'],['client','server']);
@@ -37,7 +36,8 @@ Package.onUse(function(api) {
     'lib/text.coffee.md',
     'lib/scrape-request.coffee.md',
     'lib/parse-website.coffee.md',
-    'lib/parse-feed.coffee.md'
+    'lib/parse-feed.coffee.md',
+    'lib/parse-wikipedia.coffee.md'
   ],['server']);
   api.addFiles("scrape-client.coffee.md",'client');
   api.addFiles("scrape-server.coffee.md","server");

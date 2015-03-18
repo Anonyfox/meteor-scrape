@@ -2,13 +2,11 @@
 This core module takes an HTML string and returns a proper data object. The
 following NPM modules are used:
 
-    franc = Npm.require "franc"
     articleTitle = Npm.require "article-title"
     teaser = Npm.require "teaser"
     summarize = Npm.require "summarizely"
     cheerio = Npm.require "cheerio"
     readability = Npm.require "readabilitySAX"
-    unfluff = Npm.require "unfluff"
 
 The API of this module includes a central `run()` method.
 
@@ -22,23 +20,19 @@ The API of this module includes a central `run()` method.
 
     extractFromText = (html) ->
       data = {}
-      extract = unfluff.lazy html
       data.title = articleTitle html
-      data.title or= extract.title()
       data.title or= html.match(/<title>([^<])*<\/title>/i)[0]
-      data.text = extract.text()
-      data.text or= extract.description()
-      data.text or= readability.process(html, {type: "text"}).text
+      data.title or= ""
+      data.text = readability.process(html, {type: "text"}).text
       data.text = "" unless data.text?.length > 50
       # NOTE: readability also finds the "next" page for paginated articles!
       # --> ToDo: follow the NEXT-pages and join all to one article!
-      data.teaser = extract.description()
-      data.teaser or= new teaser(data).summarize()
+      # data.teaser or new teaser(data).summarize() # currently buggy (modul intern)
       data.teaser or= ""
-      data.summary = extract.description()
-      data.summary or= summarize(data.text).join("\n")
-      data.tags = Yaki.analyse("#{data.title} #{data.text}")
-      data.tags = _.union data.tags, Yaki(extract.tags()).clean().convert()
+      data.summary = summarize(data.text).join("\n")
+      text = "#{data.title} #{data.text}"
+      lang = Text.detectLanguage text
+      data.tags = Yaki(text, language: lang).extract()
       return data
 
 ## DOM Parsing
@@ -85,8 +79,9 @@ of nasty XPaths or unreadable RegExps.
       str = $("meta[name='keywords']").attr("content")
       tags = []
       if str
+        lang = Text.detectLanguage str
         tags = if /;/.test str then str.split ';' else str.split ','
-        tags = Yaki(tags).clean().convert()
+        tags = Yaki(tags).clean()
       return tags
 
     findReferences = ($) ->
@@ -128,15 +123,13 @@ result object. Pick the best results if there is some overlap.
     mergeResults = (txt, dom) ->
       data = {}
       data.title = Text.clean(txt.title or dom.title)
-      data.text = Text.clean txt.text or dom.text
+      data.text = Text.clean(txt.text or dom.text)
       data.lang = txt.lang
-      data.description = Text.clean dom.description or txt.teaser?.join(" ") or txt.summary
+      data.description = Text.clean dom.description or txt.teaser? or txt.summary
       data.favicon = dom.favicon
       data.references = dom.references
       data.image = dom.image
       data.feeds = dom.feeds
+      data.lang = Text.detectLanguage "#{data.title} #{data.text}"
       data.tags = _.union dom.tags, txt.tags
-      data.lang = franc "#{data.title} #{data.text}", whitelist: [
-        "deu","eng","spa","pol","ita","por","nld","ukr","jpn","swh","und"
-      ]
       return data

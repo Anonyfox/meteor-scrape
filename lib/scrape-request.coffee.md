@@ -1,42 +1,68 @@
 # Scrape-Request
 
-Core module of Scrape itself. Handles the requesting of urls and the
-detection & correction of encodings. The following external libraries are used:
+Core module of Scrape itself. Handles the requesting of urls and the detection & 
+correction of encodings. In further versions it is client and server independant.
+The following external libraries are used:
 
     chardet = Npm.require 'chardet'
-    iconv = Npm.require 'iconv-lite'
+    iconv = Npm.require 'iconv-lite'  
+    
+## Configuration
+The configuration for [request](https://github.com/request/request) looks like this:
 
-The configuration for [request ](https://github.com/request/request) looks like this:
-
-    options =
-      headers:
-        'Accept-Charset': "UTF-8" # maybe the target server is friendly!
+    config =
+      headers: # Any request headers goes here
+        'Accept-Charset': "UTF-8"
       encoding: null # returns a raw buffer instead of a string
       timeout: 60*1000 # 1 minute should suffice for usual usecases
       followAllRedirects: true
 
-The API of this module is a single method, since it doesn't matter if you are
-requesting a website or a feed. Implements the
+## Port
+The Port define each exported method from module.
+
+    @ScrapeRequest = ScrapeRequest =
+    
+### `fetch`
+The main method of this module. It doesn't matter if you are
+requesting a website or a feed or anything else. Implements the
 [Google AJAX Specification](https://developers.google.com/webmasters/ajax-crawling/)
 to crawl dynamic pages. This needs a second HTTP request when necessary.
 
-    @ScrapeRequest =
       fetch: (url) ->
         try
-          html = fetch url
-          if Text.hasAjaxFragment html
-            html = fetch Link.ajaxified url
-          return html
+          return fetchRequest url
         catch e
           return null
+          
+### `mime`
+Detect the mime from any request.
 
-Request the target URL and correct the encoding to UTF-8
+      mime: (url) ->
+        result = request.getSync url, config
+        getResponseType result.response
+      
+## Helpers
+The full list of helpers used above.
 
-    fetch = (url) ->
-      result = request.getSync url, options
-      correctEncoding result.body
+### `fetchRequest`
+Request the target URL, switch between different types and correct the encoding to UTF-8.
+Define more mime types if required.
 
-Detect the encoding of the buffer and autocorrect it when not already UTF-8
+    fetchRequest = (url) ->
+      result = request.getSync url, config
+      switch getResponseType result.response
+        when 'text/html', 'text/plain'
+          body = correctEncoding result.body
+          if Text.hasAjaxFragment(body)
+            fetchRequest Link(url).ajaxify()
+          else body
+        when 'application/json'
+          body = correctEncoding result.body
+          JSON.parse body
+        else result.body
+
+### `correctEncoding`
+Detect the encoding of the buffer and autocorrect it when not already UTF-8.
 
     correctEncoding = (buffer) ->
       try
@@ -44,3 +70,13 @@ Detect the encoding of the buffer and autocorrect it when not already UTF-8
         iconv.decode buffer, encoding
       catch e
         buffer.toString()
+
+### `getResponseType`
+Get the response type from response meta informations.
+        
+    getResponseType = (response) ->
+      if response.headers['content-type']?
+        regex = new RegExp /^([^\;]+)\;?/ 
+        regex.exec(response.headers['content-type'])[1]
+      else
+        'text/plain'

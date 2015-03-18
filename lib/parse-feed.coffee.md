@@ -3,7 +3,6 @@ This module is capable of parsing RSS and Atom feeds. Just give it a
 HTML string and you're ready to go. The following libraries are used for this:
 
     cheerio = Npm.require "cheerio"
-    franc = Npm.require "franc"
 
 Instead of "real" XML handling, just use
 [cheerio](https://github.com/cheeriojs/cheerio) for this task, this way
@@ -24,16 +23,14 @@ relevant data.
       data = {}
       data.title = Text.clean $("title").first().text() or ""
       data.description = Text.clean $("summary,description").first().text() or ""
-      data.language = franc "#{data.title} #{data.description}", whitelist: [
-        "deu","eng","spa","pol","ita","por","nld","ukr","jpn","swh","und"
-      ]
       data.link = $("link").first().attr("href") or $("link").first().text()
       data.pubDate = findPubDate $
       data.image = findImage $
-      tags = $("category,categories").map((i,e) -> $(e).text()).get()
-      lang = if data.language is 'deu' then 'de' else 'en'
-      moreTags = Yaki.analyse("#{data.title} #{data.description}", language: lang)
-      data.tags = _.union tags, moreTags
+      text = "#{data.title} #{data.description}"
+      data.language = Text.detectLanguage text
+      foreignTags = $("category,categories").map((i,e) -> $(e).text()).get()
+      extractTags = Yaki(text, language: data.language).extract()
+      data.tags = _.union foreignTags, extractTags
       return data
 
 The following helper functions are used by the mapItem function, for data

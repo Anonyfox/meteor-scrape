@@ -9,37 +9,49 @@ data from it. It uses the following packages under the hood:
 To avoid confusions, URIs received as parameters are now called *links*, while
 internal used libraries or helpers are derivates of *URLs or URIs*.
 
-    @Link =
-      test: (link) -> isUrl link
-      join: (base, path) -> join base, path
-      base: (link) -> base link
-      domain: (link) -> url.parse(link).hostname
-      brands: (link) -> brands link
-      path: (link) -> url.parse(link).pathname
-      ajaxified: (link) -> ajaxified link
+## Port
+The Port define each exported method from module.
 
-Some helpers are nontrivial (or at least, don't fit well in a one-liner):
+    @Link = Link = (lnk) ->
+      link = url.parse lnk, true
+      link.base = "#{link.protocol}//#{link.hostname}"
+      link.path = link.pathname
+      link.domain = link.hostname
+      link.search = ''
+      link.brands = -> brands link
+      link.ajaxify = -> ajaxify link
+      link.create = -> url.format link
+      link.join = (path) -> url.resolve link.base, path or ''
+      link
+      
+### `join`
+Joins domain and path to a link. Regards the *deepness* of `domain`.    
+      
+    Link.join = (link, path) -> 
+      Link(link).join path
+      
+### `test`
+Test if `link` is a valid URL.
+      
+    Link.test = (link) -> 
+      isUrl link
 
-    base = (link) ->
-      u = url.parse link
-      "#{u.protocol}//#{u.hostname}"
+## Helpers
+Some helpers are nontrivial and declared below.
 
-    join = (domain, path) ->
-      if path
-        url.resolve base(domain), path
-      else
-        base(domain)
+### `brands`
+A brand is the name of SLD (in most cases) and all subdomains to SLD.
 
     brands = (link) ->
-      u = url.parse link
-      words = _.filter u.hostname.split("."), (w) -> w.length > 3
-      Yaki(words).clean().convert()
-
-    ajaxified = (link) ->
-      u = url.parse link
-      params = if u.search?.length > 1
-        u.search + "&_escaped_fragment_=!"
-      else
-        "?_escaped_fragment_=!"
-      hash = if u.hash then u.hash else ""
-      "#{u.protocol}//#{u.hostname}#{u.pathname}#{params}{hash}"
+      words = _.filter link.hostname.split("."), (w) -> w.length > 3
+      Yaki(words).clean()
+      
+### `ajaxify`
+Use the Google Specification to pages with dynamic content and ads 
+`_escaped_fragments_=!` to the query string to retrieve static content.
+      
+    ajaxify = (link) ->
+      link.query['_escaped_fragment_'] = '!'
+      result = link.create()
+      delete link.query['_escaped_fragment_']
+      result

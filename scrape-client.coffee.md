@@ -7,7 +7,6 @@ This field contains the **client** Code. And is *only* loaded in the client.
 
     @Scrape =
       website1: (url, fn) ->
-        # console.log("fetching...", url);
         Meteor.call "Scrape.website", url, (error, data) ->
           fn? error, data
       feed: (url, fn) ->
