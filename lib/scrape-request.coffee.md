@@ -55,7 +55,7 @@ Define more mime types if required.
           body = correctEncoding result.body
           JSON.parse body
         when 'image/jpeg', 'image/gif', 'image/png', 'image/tiff'
-          result.boy
+          result.body
         else 
           body = correctEncoding result.body
           if Text.hasAjaxFragment(body)
