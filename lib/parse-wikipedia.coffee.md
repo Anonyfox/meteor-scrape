@@ -19,24 +19,27 @@ This method returns a page object for further scraping (`title`, `link`, `teaser
         # Construct and fire the API request
         lang = Text.correctLanguage(lang) or 'en'
         tags = if tags then Yaki(tags, language: lang).clean() else []
+        key = Yaki([key], {language: lang, natural: false}).clean()[0]
         api = Link "http://#{lang}.wikipedia.org/w/api.php"
         api.query = addApiParams api.query
         api.query = addOpenSearchParams api.query, key
         result = ScrapeRequest.fetch api.create()
+        return {} if result and result[1].length is 0
         # Process the found pages
-        return null if result and result[1].length is 0
-        best = max: 0, id: 0
-        for teaser, i in result[2]
-          relevance = lookupForTags teaser, lang, tags 
-          if relevance > best.max
-            best.max = relevance
+        best = max: 0, id: 0, tags: []
+        # Find better pages than the first entry with optional tags
+        for title, i in result[1]
+          intersect = lookupForTags title, lang, tags
+          if intersect.quality > best.max
+            best.max = intersect.quality
+            best.tags = intersect.tags
             best.id = i
-        # Gather informations for the best page
+        # Gather informations for the best page      
         page = 
-          relevance: best.max
           lang: lang
           title: result[1][best.id]
           url: result[3][best.id]
+          tags: best.tags
   
 ### `scrape`
 Scrape an page for useful informations like teaser, pictures or a list of meta
@@ -44,32 +47,49 @@ informations. Resolve also disambiguation pages.
 
       scrape: (page, lang, tags) ->
         lang = Text.correctLanguage(lang) or 'en'
-        tags = if tags then Yaki(tags).clean() else []
-        page = if page?.title then page else title: page
+        tags = if tags then Yaki(tags, language: lang).clean() else []
+        # Extract Title
+        page = title: page if _.isString page
+        return {} unless page.title
         if page.title.match(/\[\[/)
-          page.title = @extractTitle(page.title).title
+          page.title = @extractTitle page.title
+        # Constrcut and Fire the API request
         api = Link "http://#{lang}.wikipedia.org/w/api.php"
         api.query = addApiParams api.query
         api.query = addScrapeParams api.query, page.title
         result = ScrapeRequest.fetch api.create()
-        return null unless result
-        # Example: http://goo.gl/UVsIBL
+        # Process the result (Example: http://goo.gl/UVsIBL)
+        return {} unless result
         query = _.values(result.query.pages)[0]
-        return null if query.missing?
+        return {} if query.missing?
+        # Process disambiguation
         if query.pageprops?.disambiguation?
           delete api.query['rvsection']
           result = ScrapeRequest.fetch api.create()
           query = _.values(result.query.pages)[0]
-          page = parseDisambiguationPage query.revisions[0]['*'], lang, tags
-          return if page then @scrape(page, lang, tags) else null
+          result = parseDisambiguationPage query.revisions[0]['*'], lang, tags
+          return if result
+            result.tags = _.union page.tags, result.tags
+            @scrape result, lang, tags
+          else {}
         # Fill the page object with additional informations
-        page.lang = lang
-        page.descriptions = query.terms.description if query.terms?.description
-        if query.terms?.label
-          page.tags = _.map Yaki(query.terms.label).clean(), (tags) -> tags
+        page.language = lang
+        page.keys = Yaki(page.title, {language: lang, natural: false}).split().clean()
+        if query.terms?.description
+          page.description = query.terms.description[0]
+          tags = Yaki(page.description, {language: lang, filter: false}).extract()
+          page.keys = _.union page.keys, tags
         page.aliases = query.terms.alias if query.terms?.alias
         page.url = query.canonicalurl
         page.summary = query.extract
+        # Find Image
+        if query.pageprops?['page_image']
+          image = scrapeImage page, query.pageprops?['page_image']
+          page.image = image if image
+        else
+          image = findAdditionalImage page
+          page.image = image if image
+        # Find additonal meta data
         page = parseForMetaData query.revisions[0]['*'], page
         page
         
@@ -142,6 +162,19 @@ revision.
       query['rvsection'] = '0'
       query
       
+### `addParsedPageParams`
+Additonal Paramters for a fully expanded page (intro section). Useful to scrape for
+links and images.
+
+    addParsedPageParams = (query, title) ->
+      query['action'] = 'query'
+      query['prop'] = 'revisions'
+      query['titles'] = title
+      query['rvprop'] = 'content'
+      query['rvsection'] = '0'
+      query['rvexpandtemplates'] = ''
+      query
+      
 ### `addImageParams`
 Additonal options for retrieving image informations.
 
@@ -167,8 +200,16 @@ Additional conancial options for url.
 Calculates the intersect between two tag sets. Use Dice for relevance.
 
     lookupForTags = (text, lang, tags) ->
-      terms = Yaki(text, language: lang).extract()
-      (2 * _.intersection(terms, tags).length) / (tags.length + terms.length)
+      result = Yaki(text, {language: lang, tags: tags}).extract().tags
+      reduce = (array, init, fn) -> array.reduce fn, init
+      reduce tags, {tags: [], quality: 0}, (akk, tag) -> 
+        # Maybe our tag is in a word combination
+        elem = _.find result, (elem) -> 
+          new RegExp("^(.*\\s)?#{tag}(\\s.*)?$").test elem.term
+        if elem
+          akk.quality = akk.quality + elem?.quality or 0
+          akk.tags.push tag
+        return akk
 
 ### `parseDisambiguationPage`
 This method looks into an disambiguation and retrive the right page via tags.
@@ -176,17 +217,20 @@ Returns an page object with `title` and `link`.
 
     parseDisambiguationPage = (wiki, lang, tags) ->
       lines = wiki.split "\n"
-      best = max: -1, id: -1
+      best = max: -1, id: -1, tags: []
       for line, i in lines when line[0] is '*'
-        relevance = lookupForTags line, lang, tags
-        if relevance > best.max
-          best.max = relevance
+        line = line.replace /[\[\]\|\{\}]/g, ' '
+        intersect = lookupForTags line, lang, tags
+        if intersect.quality > best.max
+          best.max = intersect.quality
+          best.tags = intersect.tags
           best.id = i
       # Find any link (if exist) in the best matching line
       title = Wikipedia.extractTitle lines[best.id]
       if title
-        page = 
-          relevance: best.max
+        page =
+          disambiguation: true
+          tags: best.tags
           title: title
       else null
 
@@ -195,16 +239,6 @@ Parse the intro/summary from any real page (not disambiguation). Find any pictur
 or additional meta informations.
     
     parseForMetaData = (wiki, page) ->
-      # Find any Images in the summary
-      image = wiki.match(/\[\[((Image|File|Datei|Bild)[^\|\]]+)/)?[1]
-      if image
-        api = Link "http://#{page.lang}.wikipedia.org/w/api.php"
-        api.query = addApiParams api.query
-        api.query = addImageParams api.query, image
-        result = ScrapeRequest.fetch api.create()
-        if result
-          # Example: http://goo.gl/d3TJ3f
-          page.image = _.values(result.query.pages)[0].imageinfo[0]
       # Find additional meta information
       page.meta = {}
       lines = wiki.split "\n"
@@ -220,6 +254,37 @@ or additional meta informations.
           page.meta[key] = value if key and value
       return page
       
+### `findAdditionalImage`
+Find addtional images in expanded page version.
+
+    findAdditionalImage = (page) ->
+      api = Link "http://#{page.lang}.wikipedia.org/w/api.php"
+      api.query = addApiParams api.query
+      api.query = addParsedPageParams api.query, page.title
+      result = ScrapeRequest.fetch api.create()
+      if result
+        html = _.values(result.query.pages)[0].revisions?[0]['*']
+        if html
+          image = html.match(/\[\[((Image|File|Datei|Bild)[^\|\]]+)/)?[1]
+          if image
+            image = scrapeImage page, image
+            return image if image
+      return null
+      
+### `scrapeImage`
+Scrape additonal image informations. Normalize the title of an image if necessary.
+
+    scrapeImage = (page, image) ->
+      image = "File:#{image}" unless image.match(/((Image|File|Datei|Bild)[^\|\]]+)/)
+      api = Link "http://#{page.lang}.wikipedia.org/w/api.php"
+      api.query = addApiParams api.query
+      api.query = addImageParams api.query, image
+      result = ScrapeRequest.fetch api.create()
+      if result
+        # Example: http://goo.gl/d3TJ3f
+        _.values(result.query.pages)[0].imageinfo?[0]
+      else null
+     
 ### `wikiToMarkdown`
 An simple recursive parser that replaces any occurences from links,
 external links (to markdown) and inner templates.

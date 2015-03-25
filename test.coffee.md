@@ -32,15 +32,14 @@ there is a proxy request involved.
 Run the following example pages. Everyone of them must work under any circumstances:
 *(Well, except they're unavailable of course)*
 
-    scrapeWebsiteTest "http://en.wikipedia.org/wiki/Meteor_%28web_framework%29"#, (test, data) -> console.log data
     scrapeWebsiteTest "http://www.golem.de/news/raspberry-pi-2-die-feierabend-maschine-1502-112365.html"
     scrapeWebsiteTest "http://blog.fefe.de/?ts=aa0e3af6"#, (test, data) -> console.log data
     scrapeWebsiteTest "http://www.bbc.com/news/technology-31565368"#, (test, data) -> console.log data
     scrapeWebsiteTest "http://lifehacker.com/thermos-controls-your-nest-from-os-x-s-notification-cen-1673279696"
     scrapeWebsiteTest "http://www.bunte.de/schweden/estelle-von-schweden-hinter-den-kulissen-der-ski-wm-117174.html"
-    scrapeWebsiteTest "https://twitter.com/meteorjs/status/542422624995778564"#, (test, data) ->      # console.log data
+    scrapeWebsiteTest "https://twitter.com/meteorjs/status/542422624995778564"#, (test, data) -> console.log data
     scrapeWebsiteTest "http://www.annabelle.ch/shopping/produkte/burberry-london-37150"#, (test, data) -> console.log data
-    scrapeWebsiteTest "https://www.meteor.com/blog/2015/01/20/meteor-show"#, (test, data) ->
+    scrapeWebsiteTest "https://www.meteor.com/blog/2015/01/20/meteor-show"#, (test, data) -> console.log data
     scrapeWebsiteTest "http://www.nachrichten.at/nachrichten/wirtschaft/Briten-blockieren-Verkauf-von-Oelfeldern-an-Russen;art15,1670166#ref=rss"#, (test, data) -> console.log data
 
 
@@ -61,7 +60,7 @@ Declare the feed test body.
 Define some feed test cases with uncommen feed structures:
 
     scrapeFeedTest "http://blog.fefe.de/rss.xml"
-    scrapeFeedTest "http://www.n-tv.de/rss", # (test, data) -> console.log data.items[0]
+    scrapeFeedTest "http://www.n-tv.de/rss"#, (test, data) -> console.log data.items[0]
     scrapeFeedTest "http://www.spiegel.de/schlagzeilen/index.rss"
     scrapeFeedTest "https://www.meteor.com/blog/atom.xml"#, (test, data) -> console.log data.items
     scrapeFeedTest "http://feeds.venturebeat.com/VentureBeat"#, (test, data) -> console.log data.items
@@ -73,17 +72,18 @@ Declare the test body. The parameter `tags` is optional.
       if Meteor.isServer
         Tinytest.add "wiki - [#{lang}] #{key}", (test) ->
           page = Scrape.wikipedia key, lang, tags
-          test.isTrue page
+          test.isTrue page.title
           switch 
             when fn? then fn test, page
             when _.isFunction(tags) then tags test, page
     
 Define some test cases with different parameters:
 
-    scrapeWikipediaTest 'HTTP', 'en', (test, page) -> console.log page
-    scrapeWikipediaTest 'HTTP', 'de', (test, page) -> console.log page
-    scrapeWikipediaTest 'RK', 'de', ['Mathematik'], (test, page) -> console.log page
+    scrapeWikipediaTest 'HTTP', 'en'#, (test, page) -> console.log page
+    scrapeWikipediaTest 'HTTP', 'de'#, (test, page) -> console.log page
+    scrapeWikipediaTest 'RK', 'de', ['Mathematik']#, (test, page) -> console.log page
     scrapeWikipediaTest 'Sparkasse Chemnitz', 'de', (test, page) -> console.log page
+    scrapeWikipediaTest 'avengers', 'en', ['film']#, (test, page) -> console.log page
     
 ## Test Mime Type Detection
 Declare the mime test body.

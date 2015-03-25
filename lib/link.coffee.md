@@ -22,6 +22,7 @@ The Port define each exported method from module.
       link.ajaxify = -> ajaxify link
       link.create = -> url.format link
       link.join = (path) -> url.resolve link.base, path or ''
+      link.inspect = (depth) -> link.create()
       link
       
 ### `join`
@@ -43,8 +44,9 @@ Some helpers are nontrivial and declared below.
 A brand is the name of SLD (in most cases) and all subdomains to SLD.
 
     brands = (link) ->
-      words = _.filter link.hostname.split("."), (w) -> w.length > 3
-      Yaki(words).clean()
+      words = _.filter link.hostname.split("."), (part) -> part.length > 3
+      words = Yaki(words, natural: false).clean()
+      words.reverse()
       
 ### `ajaxify`
 Use the Google Specification to pages with dynamic content and ads 

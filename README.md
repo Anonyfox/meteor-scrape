@@ -11,10 +11,11 @@ excellent NPM modules:
   - [Title](https://github.com/sindresorhus/article-title): the determined headline
   - Description: can be a [a four-sentence summary of the content of this page](https://www.npmjs.com/package/teaser) or [The most important sentences of the whole text](https://www.npmjs.com/package/summarizely) or handpicked from meta tags
   - **[fulltext](https://www.npmjs.com/package/readabilitySAX)**: The complete *text* of the Website (think of instapaper, pocket or readability)
-- fast and sophisticated **[tagging](https://github.com/Anonyfox/meteor-tags)**
+- fast and sophisticated **[tagging](https://github.com/nefiltari/yaki)**
 - **RSS/Atom feed parsing** and item optimization:
   - Tries hard to find an acceptable image
   - Tags the content directly
+- Find and scrape useful articles from [wikipedia.org](http://en.wikipedia.org/) via keywords in different languages
 
 ## Installation
 
@@ -28,6 +29,8 @@ Works on the server with an easy API:
 
 `data = Scrape.feed "http://example.com/rss.xml" # for RSS/Atom feeds`
 
+`data = Scrape.wikipedia "web scraping" # for Wikipedia Articles`
+
 `data = Scrape.url "http://example.com/" # for anything else, plain HTML`
 
 or on the Client **(client support still in progress, doesn't work for now.)**
@@ -38,13 +41,15 @@ or on the Client **(client support still in progress, doesn't work for now.)**
 
 `Scrape.feed "http://example.com/", (error, data) -> console.log data`
 
+`Scrape.wikipedia "web scraping", (error, data) -> console.log data`
+
 ## Responses
 
 #### Scrape.website
 
 Works best for typical articles, blog posts or other content sites, but even a tweet should
 suffice. Example response data for `http://www.bbc.com/news/technology-31565368`:
-
+```
     {
       title: 'Inside the digital war room',
 
@@ -91,6 +96,7 @@ suffice. Example response data for `http://www.bbc.com/news/technology-31565368`
 
       url: 'http://www.bbc.com/news/technology-31565368'
     }
+```
 
 #### Scrape.feed
 
@@ -99,7 +105,7 @@ Takes any RSS or Atom Feed and returns a bunch of items. For example:
     `data = Scrape.feed "http://feeds.venturebeat.com/VentureBeat"` # {items: [...]}
 
 A single news item looks like this:
-
+```
     {
       title: 'AppMachine raises $15M to help non-coders build their own mobile apps',
 
@@ -140,6 +146,39 @@ A single news item looks like this:
          'percent',
          'shares' ]
     }
+```
+    
+#### Scrape.wikipedia
+
+Takes a simple keyword and optional language and additional tags (in case of disambiguation)
+
+    `Scrape.wikipedia 'avengers', 'en', ['film']`
+    
+This produces following output:
+```
+{
+  title: 'The Avengers (2012 film)'
+  lang: 'en'
+  descriptions: [ '2012 superhero film produced by Marvel Studios' ]
+  tags: [ 'avengers' ]
+  aliases: [ 'Marvel Avengers Assemble', 'Marvel\'s The Avengers' ]
+  url: 'http://en.wikipedia.org/wiki/The_Avengers_(2012_film)'
+  summary: '<p><i><b>Marvel\'s The Avengers</b></i> (classified under the name <i><b>Marvel Avengers Assemble</b></i> in the United Kingdom and Ireland), or simply <i><b>The Avengers</b></i>, is a 2012 American superhero film based on the Marvel Comics superhero team of the same name, produced by Marvel Studios and distributed by Walt Disney Studios Motion Pictures.<sup class="reference plainlinks nourlexpansion" id="ref_1">1</sup> It is the sixth installment in the Marvel Cinematic Universe. The film was written [...]'
+  meta: 
+    caption: 'Theatrical release poster'
+    director: '[Joss Whedon](http://en.wikipedia.org/wiki/Joss_Whedon)'
+    producer: '[Kevin Feige](http://en.wikipedia.org/wiki/Kevin_Feige)'
+    screenplay: 'Joss Whedon'
+    based: '[The Avengers](http://en.wikipedia.org/wiki/Avengers_(comics))'
+    music: '[Alan Silvestri](http://en.wikipedia.org/wiki/Alan_Silvestri)'
+    cinematography: '[Seamus McGarvey](http://en.wikipedia.org/wiki/Seamus_McGarvey)'
+    studio: '[Marvel Studios](http://en.wikipedia.org/wiki/Marvel_Studios)'
+    runtime: '143 minutes'
+    country: 'United States'
+    language: 'English'
+    budget: '$220 million'
+    gross: '$1.518 billion'
+```
 
 ## ToDo
 

@@ -21,7 +21,7 @@ The API of this module includes a central `run()` method.
     extractFromText = (html) ->
       data = {}
       data.title = articleTitle html
-      data.title or= html.match(/<title>([^<])*<\/title>/i)[0]
+      data.title or= html.match(/<title>([^<]*)<\/title>/i)[0]
       data.title or= ""
       data.text = readability.process(html, {type: "text"}).text
       data.text = "" unless data.text?.length > 50
@@ -122,6 +122,7 @@ result object. Pick the best results if there is some overlap.
 
     mergeResults = (txt, dom) ->
       data = {}
+      data.url = dom.url if dom.url
       data.title = Text.clean(txt.title or dom.title)
       data.text = Text.clean(txt.text or dom.text)
       data.lang = txt.lang

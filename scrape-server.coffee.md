@@ -7,27 +7,27 @@ without any further parsing
 
     @Scrape =
       website: (url) ->
-        #try
-        html = ScrapeRequest.fetch url
-        data = ParseWebsite.run html
-        obj = correctWebsite url, data
-        #return obj
-        #catch e
-        #  return {}
+        try
+          html = ScrapeRequest.fetch url
+          data = ParseWebsite.run html
+          obj = correctWebsite url, data
+          return obj
+        catch e
+          return {}
       feed: (url) ->
-        #try
-        xml = ScrapeRequest.fetch url
-        data = ParseFeed.run xml
-        obj = correctFeedItems url, data
-        return obj
-        #catch e
-        #  return {}
+        try
+          xml = ScrapeRequest.fetch url
+          data = ParseFeed.run xml
+          obj = correctFeedItems url, data
+          return obj
+        catch e
+          return {}
       wikipedia: (key, lang, tags) ->
-        #try
-        page = Wikipedia.lookup key, lang, tags
-        return page
-        #catch e
-        #  return {}
+        try
+          page = Wikipedia.lookup key, lang, tags
+          return page
+        catch e
+          return {}
       url: (url) ->
         try
           data = ScrapeRequest.fetch url

@@ -1,6 +1,6 @@
 Package.describe({
   name: 'anonyfox:scrape',
-  version: '0.0.6',
+  version: '0.0.7',
   summary: 'Scrape any Website or RSS/Atom-Feed with ease',
   git: 'https://github.com/Anonyfox/meteor-scrape',
   documentation: 'README.md'
@@ -26,7 +26,7 @@ Package.onUse(function(api) {
     'underscore',
     'url',
     'froatsnook:request@2.53.2',
-    'nefiltari:yaki@0.0.7',
+    'nefiltari:yaki@0.1.5',
     'wizonesolutions:underscore-string@1.0.0'
   ],['server']);
   api.export(['Scrape'],['client','server']);
