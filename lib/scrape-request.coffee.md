@@ -51,15 +51,16 @@ Define more mime types if required.
     fetchRequest = (url) ->
       result = request.getSync url, config
       switch getResponseType result.response
-        when 'text/html', 'text/plain'
+        when 'application/json'
+          body = correctEncoding result.body
+          JSON.parse body
+        when 'image/jpeg', 'image/gif', 'image/png', 'image/tiff'
+          result.boy
+        else 
           body = correctEncoding result.body
           if Text.hasAjaxFragment(body)
             fetchRequest Link(url).ajaxify()
           else body
-        when 'application/json'
-          body = correctEncoding result.body
-          JSON.parse body
-        else result.body
 
 ### `correctEncoding`
 Detect the encoding of the buffer and autocorrect it when not already UTF-8.
