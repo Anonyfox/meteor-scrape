@@ -1,6 +1,6 @@
 Package.describe({
   name: 'anonyfox:scrape',
-  version: '0.0.8',
+  version: '0.0.9',
   summary: 'Scrape any Website or RSS/Atom-Feed with ease',
   git: 'https://github.com/Anonyfox/meteor-scrape',
   documentation: 'README.md'
