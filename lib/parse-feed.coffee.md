@@ -12,8 +12,26 @@ fragile RegExps!
     @ParseFeed =
       run: (xml) ->
         $ = cheerio.load xml, xmlMode: true
-        items = $('item,entry').map((i,e) -> mapItem e).get()
-        return {items: items}
+        feed = {}
+        feed.title = Text.clean $('title').first().text() or ""
+        feed.link = Text.clean $('link').first().text() or ""
+        feed.description = Text.clean $('description').first().text() or ""
+        feed.language = Text.clean $('language').first().text() or ""
+        feed.pubDate = stringToDate(Text.clean $('pubDate').first().text() or "")
+        feed.lastBuildDate = stringToDate(Text.clean $('lastBuildDate').first().text() or "")
+        feed.docs = Text.clean $('docs').first().text() or ""
+        feed.managingEditor = Text.clean $('managingEditor').first().text() or ""
+        feed.webMaster = Text.clean $('webMaster').first().text() or ""
+        
+        feed.image = {}
+        feed.image.url = Text.clean $('image url').first().text() or ""
+        feed.image.title = Text.clean $('image title').first().text() or ""
+        feed.image.link = Text.clean $('image link').first().text() or ""
+        feed.image.width = parseInt(Text.clean $('image width').first().text() or "")
+        feed.image.height = parseInt(Text.clean $('image height').first().text() or "")
+
+        feed.items = $('item,entry').map((i,e) -> mapItem e).get()
+        return feed
 
 This function takes the DOM element of a single feed item and extracts the
 relevant data.
@@ -54,3 +72,11 @@ that is nontrivial to parse.
       else
         new Date()
       return pubDate
+
+    stringToDate = (text) ->
+      text = text.replace(/(\d{1,2} \w\w\w )(15)/, "$120$2")
+      try
+        ret = new Date(text)
+      catch e
+        ret = null
+      return ret
