@@ -34,7 +34,7 @@ without any further parsing
           return data
         catch e
           return ""
-          
+
 For communication between client and server, the following Methods are required:
 
     # ToDO: may be needed when the client export works, but not now.
@@ -57,8 +57,8 @@ the transformation from any type of link to a clean absolute url.
       obj.favicon = url.join obj.favicon
       obj.references = _.map obj.references, (r) -> url.join r
       obj.domain = url.domain
-      obj.url = if obj.url then obj.url else url
-      rx = _.map url.brands(), (e) -> new RegExp(e, "i") 
+      obj.url = if obj.url then obj.url else url.create()
+      rx = _.map url.brands(), (e) -> new RegExp(e, "i")
       obj.tags = _.reject Yaki(obj.tags).clean(), (tag) ->
         _.some (r.test tag for r in rx)
       obj.references = _.uniq _.filter obj.references, (r) ->
@@ -73,7 +73,7 @@ the transformation from any type of link to a clean absolute url.
         i = _.clone item
         i.link = url.join i.link
         i.image = if i.image then url.join i.image else ""
-        rx = _.map url.brands(), (e) -> new RegExp(e, "i") 
+        rx = _.map url.brands(), (e) -> new RegExp(e, "i")
         i.tags = _.reject Yaki(i.tags).clean(), (tag) ->
           _.some (r.test tag for r in rx)
         obj.items.push i

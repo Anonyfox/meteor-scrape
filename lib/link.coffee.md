@@ -24,17 +24,17 @@ The Port define each exported method from module.
       link.join = (path) -> url.resolve link.base, path or ''
       link.inspect = (depth) -> link.create()
       link
-      
+
 ### `join`
-Joins domain and path to a link. Regards the *deepness* of `domain`.    
-      
-    Link.join = (link, path) -> 
+Joins domain and path to a link. Regards the *deepness* of `domain`.
+
+    Link.join = (link, path) ->
       Link(link).join path
-      
+
 ### `test`
 Test if `link` is a valid URL.
-      
-    Link.test = (link) -> 
+
+    Link.test = (link) ->
       isUrl link
 
 ## Helpers
@@ -47,11 +47,11 @@ A brand is the name of SLD (in most cases) and all subdomains to SLD.
       words = _.filter link.hostname.split("."), (part) -> part.length > 3
       words = Yaki(words, natural: false).clean()
       words.reverse()
-      
+
 ### `ajaxify`
-Use the Google Specification to pages with dynamic content and ads 
+Use the Google Specification to pages with dynamic content and ads
 `_escaped_fragments_=!` to the query string to retrieve static content.
-      
+
     ajaxify = (link) ->
       link.query['_escaped_fragment_'] = '!'
       result = link.create()
