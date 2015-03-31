@@ -271,15 +271,6 @@ the algorithms, the phrase *"google"* is searched in the german wikipedia.
       test.include data.summary, "Suchmaschine des US-amerikanischen Unternehmens Google Inc."
       test.equal data.image.url, 'http://upload.wikimedia.org/wikipedia/de/e/e5/Googleinterface.png'
 
-    scrapeWikipediaTest = (key, lang, tags, fn) ->
-      if Meteor.isServer
-        Tinytest.add "wiki - [#{lang}] #{key}", (test) ->
-          page = Scrape.wikipedia key, lang, tags
-          test.isTrue page.title
-          switch
-            when fn? then fn test, page
-            when _.isFunction(tags) then tags test, page
-
 #### Wikipedia Scrape with Ambiguity
 Finally, the scraper must be able to resolve phrases like `CSI`, given a few hints
 about the context. IN this case, the TV series is the desired result.
