@@ -1,0 +1,613 @@
+
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <title>The Meteor Blog</title>
+    <id>https://www.meteor.com/blog/</id>
+    <updated>2015-03-31T13:43:21Z</updated>
+    <author>
+        <name>Meteor Development Group</name>
+        <email>contact@meteor.com</email>
+        <uri>https://www.meteor.com/blog/</uri>
+    </author>
+    <subtitle>The official blog of Meteor Development Group</subtitle>
+    <generator>Feed for Node.js</generator>
+    <entry>
+        <title type="html"><![CDATA[Meteor 1.0.4: Mongo 2.6 and 3.0, Cordova updates, Template subscriptions, much more]]></title>
+        <id>https://www.meteor.com/blog/2015/03/17/meteor-104-mongo-cordova-template-subscriptions</id>
+        <link href="https://www.meteor.com/blog/2015/03/17/meteor-104-mongo-cordova-template-subscriptions">
+        </link>
+        <updated>2015-03-17T20:00:00Z</updated>
+        <summary type="html"><![CDATA[Meteor 1.0.4: Mongo 2.6 and 3.0, Cordova updates, Template subscriptions, much more]]></summary>
+        <author>
+            <name>Matt DeBergalis</name>
+            <uri>https://twitter.com/debergalis</uri>
+        </author>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Meteor 1.0.3.1: adding package summaries and scripting hooks]]></title>
+        <id>https://www.meteor.com/blog/2015/01/20/meteor-show</id>
+        <link href="https://www.meteor.com/blog/2015/01/20/meteor-show">
+        </link>
+        <updated>2015-01-21T02:10:00Z</updated>
+        <summary type="html"><![CDATA[Meteor 1.0.3.1: adding package summaries and scripting hooks]]></summary>
+        <author>
+            <name>Ekaterina Kuznetsova</name>
+        </author>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Meteor 1.0.2: Meteor shell, faster tool performance]]></title>
+        <id>https://www.meteor.com/blog/2014/12/19/meteor-102-meteor-shell</id>
+        <link href="https://www.meteor.com/blog/2014/12/19/meteor-102-meteor-shell">
+        </link>
+        <updated>2014-12-19T19:45:00Z</updated>
+        <summary type="html"><![CDATA[Meteor 1.0.2: Meteor shell, faster tool performance]]></summary>
+        <author>
+            <name>Matt DeBergalis</name>
+            <uri>https://twitter.com/debergalis</uri>
+        </author>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[December Devshop SF: Advances in MongoDB scalability, Meteor + Polymer, reactive MySQL, and more]]></title>
+        <id>https://www.meteor.com/blog/2014/12/19/december-devshop-sf-mongodb-polymer-mysql</id>
+        <link href="https://www.meteor.com/blog/2014/12/19/december-devshop-sf-mongodb-polymer-mysql">
+        </link>
+        <updated>2014-12-19T13:00:00Z</updated>
+        <summary type="html"><![CDATA[December Devshop SF: Advances in MongoDB scalability, Meteor + Polymer, reactive MySQL, and more]]></summary>
+        <author>
+            <name>Alice Yu</name>
+            <uri>https://twitter.com/yaliceme</uri>
+        </author>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Meteor Day Recap: 4,259 developers at 134 meetups on one day]]></title>
+        <id>https://www.meteor.com/blog/2014/12/10/worldwide-meteor-day</id>
+        <link href="https://www.meteor.com/blog/2014/12/10/worldwide-meteor-day">
+        </link>
+        <updated>2014-12-10T13:00:00Z</updated>
+        <summary type="html"><![CDATA[Meteor Day Recap: 4,259 developers at 134 meetups on one day]]></summary>
+        <author>
+            <name>Yuriy Dybskiy</name>
+            <uri>https://twitter.com/html5cat</uri>
+        </author>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Meteor 1.0.1: security fix for allow/deny rules]]></title>
+        <id>https://www.meteor.com/blog/2014/12/09/meteor-101-allowdeny-fix</id>
+        <link href="https://www.meteor.com/blog/2014/12/09/meteor-101-allowdeny-fix">
+        </link>
+        <updated>2014-12-09T20:30:00Z</updated>
+        <summary type="html"><![CDATA[Meteor 1.0.1: security fix for allow/deny rules]]></summary>
+        <author>
+            <name>Emily Stark</name>
+            <uri>https://twitter.com/estark37</uri>
+        </author>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Meteor 1.0]]></title>
+        <id>https://www.meteor.com/blog/2014/10/28/meteor-1-0</id>
+        <link href="https://www.meteor.com/blog/2014/10/28/meteor-1-0">
+        </link>
+        <updated>2014-10-28T18:00:00Z</updated>
+        <summary type="html"><![CDATA[Meteor 1.0]]></summary>
+        <author>
+            <name>Matt DeBergalis</name>
+            <uri>https://twitter.com/debergalis</uri>
+        </author>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Meteor 0.9.4: web and mobile from a single codebase, official testing support]]></title>
+        <id>https://www.meteor.com/blog/2014/10/13/meteor-094-mobile-and-testing</id>
+        <link href="https://www.meteor.com/blog/2014/10/13/meteor-094-mobile-and-testing">
+        </link>
+        <updated>2014-10-13T21:54:00Z</updated>
+        <summary type="html"><![CDATA[Meteor 0.9.4: web and mobile from a single codebase, official testing support]]></summary>
+        <author>
+            <name>Matt DeBergalis</name>
+            <uri>https://twitter.com/debergalis</uri>
+        </author>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[FathomDB joining Meteor]]></title>
+        <id>https://www.meteor.com/blog/2014/10/07/fathomdb-joining-meteor</id>
+        <link href="https://www.meteor.com/blog/2014/10/07/fathomdb-joining-meteor">
+        </link>
+        <updated>2014-10-07T17:00:00Z</updated>
+        <summary type="html"><![CDATA[FathomDB joining Meteor]]></summary>
+        <author>
+            <name>Matt DeBergalis</name>
+            <uri>https://twitter.com/debergalis</uri>
+        </author>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Apple allows hot code push in mobile apps]]></title>
+        <id>https://www.meteor.com/blog/2014/10/02/Apple-hot-code-push-mobile</id>
+        <link href="https://www.meteor.com/blog/2014/10/02/Apple-hot-code-push-mobile">
+        </link>
+        <updated>2014-10-02T17:53:00Z</updated>
+        <summary type="html"><![CDATA[Apple allows hot code push in mobile apps]]></summary>
+        <author>
+            <name>Alice Yu</name>
+            <uri>https://twitter.com/yaliceme</uri>
+        </author>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Meteor 0.9.3: Packaging updates and improvements]]></title>
+        <id>https://www.meteor.com/blog/2014/09/25/meteor-093-packaging-system-updates</id>
+        <link href="https://www.meteor.com/blog/2014/09/25/meteor-093-packaging-system-updates">
+        </link>
+        <updated>2014-09-26T02:45:00Z</updated>
+        <summary type="html"><![CDATA[Meteor 0.9.3: Packaging updates and improvements]]></summary>
+        <author>
+            <name>Matt DeBergalis</name>
+            <uri>https://twitter.com/debergalis</uri>
+        </author>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Meteor 0.9.2: Building iOS and Android mobile apps with PhoneGap]]></title>
+        <id>https://www.meteor.com/blog/2014/09/15/meteor-092-iOS-Android-mobile-apps-phonegap-cordova</id>
+        <link href="https://www.meteor.com/blog/2014/09/15/meteor-092-iOS-Android-mobile-apps-phonegap-cordova">
+        </link>
+        <updated>2014-09-15T20:55:00Z</updated>
+        <summary type="html"><![CDATA[Meteor 0.9.2: Building iOS and Android mobile apps with PhoneGap]]></summary>
+        <author>
+            <name>Matt DeBergalis</name>
+            <uri>https://twitter.com/debergalis</uri>
+        </author>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Meteor 0.9.1: Meteor developer organizations, solidified Blaze APIs]]></title>
+        <id>https://www.meteor.com/blog/2014/09/04/meteor-091-organizations-blaze-APIs</id>
+        <link href="https://www.meteor.com/blog/2014/09/04/meteor-091-organizations-blaze-APIs">
+        </link>
+        <updated>2014-09-04T23:58:00Z</updated>
+        <summary type="html"><![CDATA[Meteor 0.9.1: Meteor developer organizations, solidified Blaze APIs]]></summary>
+        <author>
+            <name>Avital Oliver</name>
+            <uri>https://github.com/avital</uri>
+        </author>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Introducing MeteorPad, the Meteor code playground]]></title>
+        <id>https://www.meteor.com/blog/2014/09/01/meteorpad-meteor-code-playground</id>
+        <link href="https://www.meteor.com/blog/2014/09/01/meteorpad-meteor-code-playground">
+        </link>
+        <updated>2014-09-01T22:00:00Z</updated>
+        <summary type="html"><![CDATA[Introducing MeteorPad, the Meteor code playground]]></summary>
+        <author>
+            <name>Alice Yu</name>
+            <uri>https://twitter.com/yaliceme</uri>
+        </author>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Isobuild: why Meteor created a new package system]]></title>
+        <id>https://www.meteor.com/blog/2014/08/28/isobuild-why-meteor-created-a-new-package-system</id>
+        <link href="https://www.meteor.com/blog/2014/08/28/isobuild-why-meteor-created-a-new-package-system">
+        </link>
+        <updated>2014-08-28T14:00:00Z</updated>
+        <summary type="html"><![CDATA[Isobuild: why Meteor created a new package system]]></summary>
+        <author>
+            <name>Geoff Schmidt</name>
+            <uri>https://twitter.com/immir</uri>
+        </author>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Introducing Meteor 0.9.0 and the official Meteor packaging system]]></title>
+        <id>https://www.meteor.com/blog/2014/08/26/meteor-090-new-packaging-system</id>
+        <link href="https://www.meteor.com/blog/2014/08/26/meteor-090-new-packaging-system">
+        </link>
+        <updated>2014-08-26T14:00:00Z</updated>
+        <summary type="html"><![CDATA[Introducing Meteor 0.9.0 and the official Meteor packaging system]]></summary>
+        <author>
+            <name>Geoff Schmidt</name>
+            <uri>https://twitter.com/immir</uri>
+        </author>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[July Devshop SF: UI harnesses and JSFiddle for Meteor]]></title>
+        <id>https://www.meteor.com/blog/2014/08/18/meteor-devshop-sf-july-2014</id>
+        <link href="https://www.meteor.com/blog/2014/08/18/meteor-devshop-sf-july-2014">
+        </link>
+        <updated>2014-08-18T21:30:00Z</updated>
+        <summary type="html"><![CDATA[July Devshop SF: UI harnesses and JSFiddle for Meteor]]></summary>
+        <author>
+            <name>Katie Lee</name>
+            <uri>https://twitter.com/ktylee19</uri>
+        </author>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Optimize your production Meteor apps with Kadira]]></title>
+        <id>https://www.meteor.com/blog/2014/08/14/kadira</id>
+        <link href="https://www.meteor.com/blog/2014/08/14/kadira">
+        </link>
+        <updated>2014-08-14T22:06:00Z</updated>
+        <summary type="html"><![CDATA[Optimize your production Meteor apps with Kadira]]></summary>
+        <author>
+            <name>Alice Yu</name>
+            <uri>https://twitter.com/yaliceme</uri>
+        </author>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Sneak preview of the Meteor visual redesign]]></title>
+        <id>https://www.meteor.com/blog/2014/08/07/visual-redesign</id>
+        <link href="https://www.meteor.com/blog/2014/08/07/visual-redesign">
+        </link>
+        <updated>2014-08-07T16:58:00Z</updated>
+        <summary type="html"><![CDATA[Sneak preview of the Meteor visual redesign]]></summary>
+        <author>
+            <name>Katie Lee</name>
+            <uri>https://twitter.com/ktylee19</uri>
+        </author>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Meteor Summer Hackathon 2014: Drones, neo4j, and more in 24 hours]]></title>
+        <id>https://www.meteor.com/blog/2014/08/04/meteor-hackathon-2014-recap</id>
+        <link href="https://www.meteor.com/blog/2014/08/04/meteor-hackathon-2014-recap">
+        </link>
+        <updated>2014-08-04T22:00:00Z</updated>
+        <summary type="html"><![CDATA[Meteor Summer Hackathon 2014: Drones, neo4j, and more in 24 hours]]></summary>
+        <author>
+            <name>Katie Lee</name>
+            <uri>https://twitter.com/ktylee19</uri>
+        </author>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Meteor wins MongoDB Innovation Award]]></title>
+        <id>https://www.meteor.com/blog/2014/07/30/mongodb-innovation-award</id>
+        <link href="https://www.meteor.com/blog/2014/07/30/mongodb-innovation-award">
+        </link>
+        <updated>2014-07-30T19:01:00Z</updated>
+        <summary type="html"><![CDATA[Meteor wins MongoDB Innovation Award]]></summary>
+        <author>
+            <name>Alice Yu</name>
+            <uri>https://twitter.com/yaliceme</uri>
+        </author>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Meteor 0.8.3]]></title>
+        <id>https://www.meteor.com/blog/2014/07/29/meteor-083</id>
+        <link href="https://www.meteor.com/blog/2014/07/29/meteor-083">
+        </link>
+        <updated>2014-07-29T21:55:00Z</updated>
+        <summary type="html"><![CDATA[Meteor 0.8.3]]></summary>
+        <author>
+            <name>Matt DeBergalis</name>
+            <uri>https://twitter.com/debergalis</uri>
+        </author>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[June Devshop SF: Velocity, Box, and CodeCamp]]></title>
+        <id>https://www.meteor.com/blog/2014/07/15/meteor-devshop-sf-june-2014</id>
+        <link href="https://www.meteor.com/blog/2014/07/15/meteor-devshop-sf-june-2014">
+        </link>
+        <updated>2014-07-15T13:22:00Z</updated>
+        <summary type="html"><![CDATA[June Devshop SF: Velocity, Box, and CodeCamp]]></summary>
+        <author>
+            <name>Katie Lee</name>
+            <uri>https://twitter.com/ktylee19</uri>
+        </author>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Announcing Velocity: the official testing framework for Meteor applications]]></title>
+        <id>https://www.meteor.com/blog/2014/07/14/meteor-testing-framework-velocity</id>
+        <link href="https://www.meteor.com/blog/2014/07/14/meteor-testing-framework-velocity">
+        </link>
+        <updated>2014-07-14T13:17:00Z</updated>
+        <summary type="html"><![CDATA[Announcing Velocity: the official testing framework for Meteor applications]]></summary>
+        <author>
+            <name>Alice Yu</name>
+            <uri>https://twitter.com/yaliceme</uri>
+        </author>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Meteor 0.8.2: improved password storage]]></title>
+        <id>https://www.meteor.com/blog/2014/06/23/meteor-082</id>
+        <link href="https://www.meteor.com/blog/2014/06/23/meteor-082">
+        </link>
+        <updated>2014-06-23T15:24:00Z</updated>
+        <summary type="html"><![CDATA[Meteor 0.8.2: improved password storage]]></summary>
+        <author>
+            <name>Emily Stark</name>
+            <uri>https://twitter.com/estark37</uri>
+        </author>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Announcing the 2014 Meteor Challenge]]></title>
+        <id>https://www.meteor.com/blog/2014/06/23/meteor-challenge-2014</id>
+        <link href="https://www.meteor.com/blog/2014/06/23/meteor-challenge-2014">
+        </link>
+        <updated>2014-06-23T09:39:00Z</updated>
+        <summary type="html"><![CDATA[Announcing the 2014 Meteor Challenge]]></summary>
+        <author>
+            <name>Alice Yu</name>
+            <uri>https://twitter.com/yaliceme</uri>
+        </author>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[June Devshop London: Lookback, the multi-device web, and more]]></title>
+        <id>https://www.meteor.com/blog/2014/06/20/devshop-london-june-2014</id>
+        <link href="https://www.meteor.com/blog/2014/06/20/devshop-london-june-2014">
+        </link>
+        <updated>2014-06-21T03:07:00Z</updated>
+        <summary type="html"><![CDATA[June Devshop London: Lookback, the multi-device web, and more]]></summary>
+        <author>
+            <name>Oli Evans</name>
+            <uri>https://twitter.com/olizilla</uri>
+        </author>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Meteor Summer Hackathon 2014]]></title>
+        <id>https://www.meteor.com/blog/2014/06/12/meteor-summer-hackathon-2014</id>
+        <link href="https://www.meteor.com/blog/2014/06/12/meteor-summer-hackathon-2014">
+        </link>
+        <updated>2014-06-12T19:23:00Z</updated>
+        <summary type="html"><![CDATA[Meteor Summer Hackathon 2014]]></summary>
+        <author>
+            <name>Katie Lee</name>
+            <uri>https://twitter.com/ktylee19</uri>
+        </author>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Meteor and Famo.us on mobile: why JavaScript will win over native]]></title>
+        <id>https://www.meteor.com/blog/2014/06/03/meteor-famous-mobile</id>
+        <link href="https://www.meteor.com/blog/2014/06/03/meteor-famous-mobile">
+        </link>
+        <updated>2014-06-03T15:02:00Z</updated>
+        <summary type="html"><![CDATA[Meteor and Famo.us on mobile: why JavaScript will win over native]]></summary>
+        <author>
+            <name>Zoltan Olah</name>
+            <uri>https://twitter.com/zqzoltan</uri>
+        </author>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Meteor Devshop London - April]]></title>
+        <id>https://www.meteor.com/blog/2014/05/01/meteor-devshop-london-april</id>
+        <link href="https://www.meteor.com/blog/2014/05/01/meteor-devshop-london-april">
+        </link>
+        <updated>2014-05-02T05:19:00Z</updated>
+        <summary type="html"><![CDATA[Meteor Devshop London - April]]></summary>
+        <author>
+            <name>Oli Evans</name>
+            <uri>https://twitter.com/olizilla</uri>
+        </author>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Meteor 0.8.1: important update for OAuth security]]></title>
+        <id>https://www.meteor.com/blog/2014/04/30/meteor-081-important-oauth-update</id>
+        <link href="https://www.meteor.com/blog/2014/04/30/meteor-081-important-oauth-update">
+        </link>
+        <updated>2014-04-30T18:00:00Z</updated>
+        <summary type="html"><![CDATA[Meteor 0.8.1: important update for OAuth security]]></summary>
+        <author>
+            <name>Emily Stark</name>
+            <uri>https://twitter.com/estark37</uri>
+        </author>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Meteor for students: King Juan Carlos University in Madrid]]></title>
+        <id>https://www.meteor.com/blog/2014/04/10/meteor-students-madrid</id>
+        <link href="https://www.meteor.com/blog/2014/04/10/meteor-students-madrid">
+        </link>
+        <updated>2014-04-10T08:10:00Z</updated>
+        <summary type="html"><![CDATA[Meteor for students: King Juan Carlos University in Madrid]]></summary>
+        <author>
+            <name>Alice Yu</name>
+            <uri>https://twitter.com/yaliceme</uri>
+        </author>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Heartbleed]]></title>
+        <id>https://www.meteor.com/blog/2014/04/09/heartbleed</id>
+        <link href="https://www.meteor.com/blog/2014/04/09/heartbleed">
+        </link>
+        <updated>2014-04-09T22:00:00Z</updated>
+        <summary type="html"><![CDATA[Heartbleed]]></summary>
+        <author>
+            <name>Nick Martin</name>
+            <uri>https://twitter.com/n1mmy</uri>
+        </author>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Collaborative 3D scene builder in 50 lines of code]]></title>
+        <id>https://www.meteor.com/blog/2014/04/08/blaze-3D-X3DOM</id>
+        <link href="https://www.meteor.com/blog/2014/04/08/blaze-3D-X3DOM">
+        </link>
+        <updated>2014-04-08T11:00:00Z</updated>
+        <summary type="html"><![CDATA[Collaborative 3D scene builder in 50 lines of code]]></summary>
+        <author>
+            <name>Sashko Stubailo</name>
+            <uri>https://twitter.com/stubailo</uri>
+        </author>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Updating for Blaze and Meteor 1.0]]></title>
+        <id>https://www.meteor.com/blog/2014/04/04/blaze-meteor-1-pt-0</id>
+        <link href="https://www.meteor.com/blog/2014/04/04/blaze-meteor-1-pt-0">
+        </link>
+        <updated>2014-04-04T08:30:00Z</updated>
+        <summary type="html"><![CDATA[Updating for Blaze and Meteor 1.0]]></summary>
+        <author>
+            <name>Alice Yu</name>
+            <uri>https://twitter.com/yaliceme</uri>
+        </author>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Meteor and testing]]></title>
+        <id>https://www.meteor.com/blog/2014/03/31/meteor-testing</id>
+        <link href="https://www.meteor.com/blog/2014/03/31/meteor-testing">
+        </link>
+        <updated>2014-03-31T15:30:00Z</updated>
+        <summary type="html"><![CDATA[Meteor and testing]]></summary>
+        <author>
+            <name>Alice Yu</name>
+            <uri>https://twitter.com/yaliceme</uri>
+        </author>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Introducing the Blaze live templating engine and Meteor 0.8.0]]></title>
+        <id>https://www.meteor.com/blog/2014/03/27/meteor-080-introducing-blaze</id>
+        <link href="https://www.meteor.com/blog/2014/03/27/meteor-080-introducing-blaze">
+        </link>
+        <updated>2014-03-27T22:30:00Z</updated>
+        <summary type="html"><![CDATA[Introducing the Blaze live templating engine and Meteor 0.8.0]]></summary>
+        <author>
+            <name>Matt DeBergalis</name>
+            <uri>https://twitter.com/debergalis</uri>
+        </author>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[MongoDB gotchas to watch for]]></title>
+        <id>https://www.meteor.com/blog/2014/03/25/mongodb-slava-kim</id>
+        <link href="https://www.meteor.com/blog/2014/03/25/mongodb-slava-kim">
+        </link>
+        <updated>2014-03-25T15:03:00Z</updated>
+        <summary type="html"><![CDATA[MongoDB gotchas to watch for]]></summary>
+        <author>
+            <name>Alice Yu</name>
+            <uri>https://twitter.com/yaliceme</uri>
+        </author>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Meteor 0.7.2: completing our work scaling realtime MongoDB queries]]></title>
+        <id>https://www.meteor.com/blog/2014/03/18/meteor-072-scaling-realtime-mongodb</id>
+        <link href="https://www.meteor.com/blog/2014/03/18/meteor-072-scaling-realtime-mongodb">
+        </link>
+        <updated>2014-03-18T21:18:00Z</updated>
+        <summary type="html"><![CDATA[Meteor 0.7.2: completing our work scaling realtime MongoDB queries]]></summary>
+        <author>
+            <name>Matt DeBergalis</name>
+            <uri>https://twitter.com/debergalis</uri>
+        </author>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Why Meteor doesn't use session cookies]]></title>
+        <id>https://www.meteor.com/blog/2014/03/14/session-cookies</id>
+        <link href="https://www.meteor.com/blog/2014/03/14/session-cookies">
+        </link>
+        <updated>2014-03-14T09:05:00Z</updated>
+        <summary type="html"><![CDATA[Why Meteor doesn't use session cookies]]></summary>
+        <author>
+            <name>Emily Stark</name>
+            <uri>https://twitter.com/estark37</uri>
+        </author>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Meteor for kids]]></title>
+        <id>https://www.meteor.com/blog/2014/03/12/meteor-for-kids</id>
+        <link href="https://www.meteor.com/blog/2014/03/12/meteor-for-kids">
+        </link>
+        <updated>2014-03-12T20:06:00Z</updated>
+        <summary type="html"><![CDATA[Meteor for kids]]></summary>
+        <author>
+            <name>Alice Yu</name>
+            <uri>https://twitter.com/yaliceme</uri>
+        </author>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Join Meteor at Fluent 2014]]></title>
+        <id>https://www.meteor.com/blog/2014/03/04/join-meteor-at-fluent-2014</id>
+        <link href="https://www.meteor.com/blog/2014/03/04/join-meteor-at-fluent-2014">
+        </link>
+        <updated>2014-03-05T04:22:00Z</updated>
+        <summary type="html"><![CDATA[Join Meteor at Fluent 2014]]></summary>
+        <author>
+            <name>Alice Yu</name>
+            <uri>https://twitter.com/yaliceme</uri>
+        </author>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Meteorite feature: Kris Hamoud of Paytagz]]></title>
+        <id>https://www.meteor.com/blog/2014/02/26/meteorite-feature-kris-hamoud-of-paytagz</id>
+        <link href="https://www.meteor.com/blog/2014/02/26/meteorite-feature-kris-hamoud-of-paytagz">
+        </link>
+        <updated>2014-02-27T04:30:00Z</updated>
+        <summary type="html"><![CDATA[Meteorite feature: Kris Hamoud of Paytagz]]></summary>
+        <author>
+            <name>Alice Yu</name>
+            <uri>https://twitter.com/yaliceme</uri>
+        </author>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Meteor developer accounts]]></title>
+        <id>https://www.meteor.com/blog/2014/02/25/meteor-developer-accounts</id>
+        <link href="https://www.meteor.com/blog/2014/02/25/meteor-developer-accounts">
+        </link>
+        <updated>2014-02-26T00:54:00Z</updated>
+        <summary type="html"><![CDATA[Meteor developer accounts]]></summary>
+        <author>
+            <name>Emily Stark</name>
+            <uri>https://twitter.com/estark37</uri>
+        </author>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Meteor 0.7.1: oplog support for complex queries, Meteor developer accounts]]></title>
+        <id>https://www.meteor.com/blog/2014/02/24/meteor-071-oplog-support-for-complex-queries-meteor-developer-accounts</id>
+        <link href="https://www.meteor.com/blog/2014/02/24/meteor-071-oplog-support-for-complex-queries-meteor-developer-accounts">
+        </link>
+        <updated>2014-02-24T21:00:00Z</updated>
+        <summary type="html"><![CDATA[Meteor 0.7.1: oplog support for complex queries, Meteor developer accounts]]></summary>
+        <author>
+            <name>Matt DeBergalis</name>
+            <uri>https://twitter.com/debergalis</uri>
+        </author>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[The new Atmosphere beta is out]]></title>
+        <id>https://www.meteor.com/blog/2014/02/20/the-new-atmosphere-beta-is-out</id>
+        <link href="https://www.meteor.com/blog/2014/02/20/the-new-atmosphere-beta-is-out">
+        </link>
+        <updated>2014-02-21T03:00:00Z</updated>
+        <summary type="html"><![CDATA[The new Atmosphere beta is out]]></summary>
+        <author>
+            <name>Alice Yu</name>
+            <uri>https://twitter.com/yaliceme</uri>
+        </author>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Meteor Paris turns one: Vianney Lecroart writes in]]></title>
+        <id>https://www.meteor.com/blog/2014/02/18/meteor-paris-turns-one-vianney-lecroart-writes-in</id>
+        <link href="https://www.meteor.com/blog/2014/02/18/meteor-paris-turns-one-vianney-lecroart-writes-in">
+        </link>
+        <updated>2014-02-18T19:47:00Z</updated>
+        <summary type="html"><![CDATA[Meteor Paris turns one: Vianney Lecroart writes in]]></summary>
+        <author>
+            <name>Alice Yu</name>
+            <uri>https://twitter.com/yaliceme</uri>
+        </author>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Pete Hunt talks Facebook React]]></title>
+        <id>https://www.meteor.com/blog/2014/02/14/pete-hunt-talks-facebook-react</id>
+        <link href="https://www.meteor.com/blog/2014/02/14/pete-hunt-talks-facebook-react">
+        </link>
+        <updated>2014-02-14T20:00:00Z</updated>
+        <summary type="html"><![CDATA[Pete Hunt talks Facebook React]]></summary>
+        <author>
+            <name>Alice Yu</name>
+            <uri>https://twitter.com/yaliceme</uri>
+        </author>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Devshop London has arrived]]></title>
+        <id>https://www.meteor.com/blog/2014/02/13/devshop-london-has-arrived</id>
+        <link href="https://www.meteor.com/blog/2014/02/13/devshop-london-has-arrived">
+        </link>
+        <updated>2014-02-14T01:04:00Z</updated>
+        <summary type="html"><![CDATA[Devshop London has arrived]]></summary>
+        <author>
+            <name>Jade Wang</name>
+            <uri>https://twitter.com/qiqing</uri>
+        </author>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[A reactive SVG demo]]></title>
+        <id>https://www.meteor.com/blog/2014/02/06/a-reactive-svg-demo</id>
+        <link href="https://www.meteor.com/blog/2014/02/06/a-reactive-svg-demo">
+        </link>
+        <updated>2014-02-06T19:00:00Z</updated>
+        <summary type="html"><![CDATA[A reactive SVG demo]]></summary>
+        <author>
+            <name>Avital Oliver</name>
+            <uri>https://github.com/avital</uri>
+        </author>
+    </entry>
+</feed>

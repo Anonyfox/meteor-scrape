@@ -24,6 +24,7 @@ Package.onUse(function(api) {
   api.use([
     'coffeescript',
     'underscore',
+    'digilord:sugarjs',
     'url',
     'froatsnook:request@2.53.2',
     'nefiltari:yaki@0.1.5',
@@ -51,5 +52,15 @@ Package.onTest(function(api) {
     'underscore',
   ],['client','server']);
   api.use('anonyfox:scrape');
+  api.addFiles([ // sample data
+    'sampledata/sites/venturebeat-website.html',
+    'sampledata/sites/focus-website.html',
+    'sampledata/sites/bbc-article.html',
+    'sampledata/sites/tweet.html',
+    'sampledata/sites/golem-article.html',
+    'sampledata/feeds/meteor-feed.xml',
+    'sampledata/feeds/spiegel-feed.xml',
+    'sampledata/feeds/rtv-feed.xml'
+  ], 'server', {isAsset: true});
   api.addFiles('test.coffee.md');
 });

@@ -9,7 +9,7 @@ without any further parsing
       website: (url) ->
         try
           html = ScrapeRequest.fetch url
-          data = ParseWebsite.run html
+          data = ParseWebsite html
           obj = correctWebsite url, data
           return obj
         catch e
@@ -17,7 +17,7 @@ without any further parsing
       feed: (url) ->
         try
           xml = ScrapeRequest.fetch url
-          data = ParseFeed.run xml
+          data = ParseFeed xml
           obj = correctFeedItems url, data
           return obj
         catch e
