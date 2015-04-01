@@ -41,7 +41,7 @@ Works on the **server** with an easy API:
 
 Works best for typical articles, blog posts or other content sites, but even a tweet should
 suffice. Example response data for `http://www.bbc.com/news/technology-31565368`:
-```
+````json
     {
       title: 'Inside the digital war room',
 
@@ -88,16 +88,18 @@ suffice. Example response data for `http://www.bbc.com/news/technology-31565368`
 
       url: 'http://www.bbc.com/news/technology-31565368'
     }
-```
+````
 
 #### Scrape.feed
 
 Takes any RSS or Atom Feed and returns a bunch of items. For example:
 
-    `data = Scrape.feed "http://feeds.venturebeat.com/VentureBeat"` # {items: [...]}
+````coffee-script
+    data = Scrape.feed "http://feeds.venturebeat.com/VentureBeat" # {items: [...]}
+````
 
 A single news item looks like this:
-```
+````json
     {
       title: 'AppMachine raises $15M to help non-coders build their own mobile apps',
 
@@ -138,16 +140,18 @@ A single news item looks like this:
          'percent',
          'shares' ]
     }
-```
+````
 
 #### Scrape.wikipedia
 
 Takes a simple keyword and optional language and additional tags (in case of disambiguation)
 
-    `Scrape.wikipedia 'avengers', 'en', ['film']`
+````coffee-script
+    Scrape.wikipedia 'avengers', 'en', ['film']
+````
 
 This produces following output:
-```
+````json
 {
   title: 'The Avengers (2012 film)'
   lang: 'en'
@@ -170,7 +174,7 @@ This produces following output:
     language: 'English'
     budget: '$220 million'
     gross: '$1.518 billion'
-```
+````
 
 ## ToDo
 
