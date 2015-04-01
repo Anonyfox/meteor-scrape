@@ -24,7 +24,7 @@ Package.onUse(function(api) {
   api.use([
     'coffeescript',
     'underscore',
-    'digilord:sugarjs',
+    'digilord:sugarjs@1.4.1',
     'url',
     'froatsnook:request@2.53.2',
     'nefiltari:yaki@0.1.5',
