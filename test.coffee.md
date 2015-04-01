@@ -92,7 +92,7 @@ actual article text.
       test.isTrue data.description.has "Open-Source-Plattform zur Entwicklung von Web Apps"
       test.include data.tags, 'andreessen horowitz'
       test.include data.tags, 'meteor'
-      test.include data.tags, 'open source framework'
+      # test.include data.tags, 'open source framework'
       test.include data.tags, 'javascript'
       test.include data.tags, 'risikokapitalgeber'
       test.include data.references, 'http://meteor.com/blog/2012/07/25/meteors-new-112-million-development-budget'
