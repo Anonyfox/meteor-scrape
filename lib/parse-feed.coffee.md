@@ -10,7 +10,6 @@ efficient CSS3 selectorss can be used instead of nasty XPaths or
 fragile RegExps!
 
     @ParseFeed = (xml) ->
-      # run: (xml) ->
       $ = cheerio.load xml, xmlMode: true
       feed = {}
       feed.title = Text.clean $('title').first().text() or ""

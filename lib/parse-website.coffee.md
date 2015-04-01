@@ -11,7 +11,6 @@ following NPM modules are used:
 The API of this module includes a central `run()` method.
 
     @ParseWebsite = share.ParseWebsite = (html) ->
-      # run: (html) ->
       txt = extractFromText html
       dom = extractFromDOM html
       mergeResults txt, dom
