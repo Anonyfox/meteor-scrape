@@ -4,44 +4,36 @@ This package adds some sophisticated scraping utilities to your meteor app. You 
 HTML sites or RSS/Atom-Feeds and get a nicely detailed result object back. A few features, built on top of
 excellent NPM modules:
 
-- **Encoding autocorrection**: Don't worry for non-UTF-8 sources, they'll get [detected](https://github.com/runk/node-chardet) and [converted](https://github.com/ashtuchkin/iconv-lite)
-- Follows the **Google Ajax Specification***, thus can scrape dynamic pages (as long as google could do it, too)
-- **[Language Detection](https://github.com/wooorm/franc)**
-- **Summarization**: extracted text content on websites comes in different flavors:
-  - [Title](https://github.com/sindresorhus/article-title): the determined headline
-  - Description: can be a [a four-sentence summary of the content of this page](https://www.npmjs.com/package/teaser) or [The most important sentences of the whole text](https://www.npmjs.com/package/summarizely) or handpicked from meta tags
-  - **[fulltext](https://www.npmjs.com/package/readabilitySAX)**: The complete *text* of the Website (think of instapaper, pocket or readability)
+- **Encoding autocorrection**: non-UTF-8 sources, get [detected](https://github.com/runk/node-chardet) and [converted](https://github.com/ashtuchkin/iconv-lite)
+- Follows the **Google Ajax Specification***, [can scrape dynamic pages](https://developers.google.com/webmasters/ajax-crawling/)
+- **[Language Detection](https://github.com/wooorm/franc)** is built in
 - fast and sophisticated **[tagging](https://github.com/nefiltari/yaki)**
 - **RSS/Atom feed parsing** and item optimization:
   - Tries hard to find an acceptable image
   - Tags the content directly
-- Find and scrape useful articles from [wikipedia.org](http://en.wikipedia.org/) via keywords in different languages
+- Scrape [wikipedia.org](http://en.wikipedia.org/) directly via keywords in different languages
 
 ## Installation
 
 `meteor add anonyfox:scrape`
 
-## Usage
+## Quickstart
 
-Works on the server with an easy API:
+Works on the **server** with an easy API:
 
-`data = Scrape.website "http://example.com/article" # for websites and articles`
+````coffee-script
+    # scrape any website
+    websiteData = Scrape.website "http://example.com/article"
 
-`data = Scrape.feed "http://example.com/rss.xml" # for RSS/Atom feeds`
+    # scrape any RSS or Atom feed
+    feedData = Scrape.feed "http://example.com/rss.xml"
 
-`data = Scrape.wikipedia "web scraping" # for Wikipedia Articles`
+    # scrape wikipedia
+    article = Scrape.wikipedia "web scraping"
 
-`data = Scrape.url "http://example.com/" # for anything else, plain HTML`
-
-or on the Client **(client support still in progress, doesn't work for now.)**
-
-`Scrape.website "http://example.com/article", (error, data) -> console.log data`
-
-`Scrape.feed "http://example.com/article", (error, data) -> console.log data`
-
-`Scrape.feed "http://example.com/", (error, data) -> console.log data`
-
-`Scrape.wikipedia "web scraping", (error, data) -> console.log data`
+    # scrape everything else, without further parsing
+    data = Scrape.url "http://example.com/"
+````
 
 ## Responses
 
@@ -147,13 +139,13 @@ A single news item looks like this:
          'shares' ]
     }
 ```
-    
+
 #### Scrape.wikipedia
 
 Takes a simple keyword and optional language and additional tags (in case of disambiguation)
 
     `Scrape.wikipedia 'avengers', 'en', ['film']`
-    
+
 This produces following output:
 ```
 {
@@ -164,7 +156,7 @@ This produces following output:
   aliases: [ 'Marvel Avengers Assemble', 'Marvel\'s The Avengers' ]
   url: 'http://en.wikipedia.org/wiki/The_Avengers_(2012_film)'
   summary: '<p><i><b>Marvel\'s The Avengers</b></i> (classified under the name <i><b>Marvel Avengers Assemble</b></i> in the United Kingdom and Ireland), or simply <i><b>The Avengers</b></i>, is a 2012 American superhero film based on the Marvel Comics superhero team of the same name, produced by Marvel Studios and distributed by Walt Disney Studios Motion Pictures.<sup class="reference plainlinks nourlexpansion" id="ref_1">1</sup> It is the sixth installment in the Marvel Cinematic Universe. The film was written [...]'
-  meta: 
+  meta:
     caption: 'Theatrical release poster'
     director: '[Joss Whedon](http://en.wikipedia.org/wiki/Joss_Whedon)'
     producer: '[Kevin Feige](http://en.wikipedia.org/wiki/Kevin_Feige)'
@@ -189,5 +181,4 @@ This produces following output:
 ## License
 
 Scraping is a game of catch-22, and everything may break everytime. Therefore this package is licensed under
-the **LGPL 3.0**. Do whatever you want with it, but please give improvements and bugfixes back so everyone can benefit
-from it.
+the **LGPL 3.0**. Do whatever you want with it, but please give improvements and bugfixes back so everyone can benefit.
