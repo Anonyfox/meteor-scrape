@@ -41,7 +41,7 @@ Works on the **server** with an easy API:
 
 Works best for typical articles, blog posts or other content sites, but even a tweet should
 suffice. Example response data for `http://www.bbc.com/news/technology-31565368`:
-````json
+````javascript
     {
       title: 'Inside the digital war room',
 
@@ -99,7 +99,7 @@ Takes any RSS or Atom Feed and returns a bunch of items. For example:
 ````
 
 A single news item looks like this:
-````json
+````javascript
     {
       title: 'AppMachine raises $15M to help non-coders build their own mobile apps',
 
@@ -151,7 +151,7 @@ Takes a simple keyword and optional language and additional tags (in case of dis
 ````
 
 This produces following output:
-````json
+````javascript
 {
   title: 'The Avengers (2012 film)'
   lang: 'en'
