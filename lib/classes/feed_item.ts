@@ -27,10 +27,10 @@ module Parse.Feed {
 		}
 		
 		private extractBasicData(): void {
-			this.title = Extract.Title.fromCheerio(this.$).toString();
-			this.description = Extract.Description.fromCheerio(this.$).toString();
-			this.url = Extract.Link.fromCheerio(this.$).toString();
-			this.pubDate = Extract.PubDate.fromCheerio(this.$).toDate();
+			this.title = Extract.Title(this.$);
+			this.description = Extract.Description(this.$);
+			this.url = Extract.Link(this.$);
+			this.pubDate = Extract.PubDate(this.$);
 			this.extractImage();
 		}
 		

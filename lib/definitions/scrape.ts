@@ -27,61 +27,8 @@
 /// <reference path="../classes/article.ts" />
 
 // UNTYPED LIBRARIES :(
-declare var Yaki; // TODO: create a *.d.ts definition file for yaki
-declare var franc; // TODO: create a *.d.ts definition file for franc
-
-/**
- * Extractors: 
- * 
- * common modules to retrieve specific data from DOM nodes
- * or plain text strings.
- * 
- * In addition to their instance methods described in the 
- * interfaces below, every Extractor also must have a
- * ` fromCheerio()` and `fromString()` static method for
- * convenient shorthand access.
- * 
- * The interfaces below are used for the internal classes of
- * these modules, whose instances are finally returned.
- */
-
-module Extract {
-	
-	export interface ITitleExtractor {
-		toString(): string;
-	}
-	
-	export interface IDescriptionExtractor {
-		toString(): string;
-	}
-	
-	export interface IImageExtractor {
-		toString(): string;
-	}
-	
-	export interface ILinkExtractor {
-		domain(): string;
-		path(): string;
-		toString(): string;
-	}
-	
-	export interface IPubDateExtractor {
-		toString(pattern?: string): string;
-		toDate(): Date;
-	}
-	
-	export interface IFulltextExtractor {
-		toString(): string;
-	}
-	
-	export interface IFeedsExtractor {
-		toList(): string[];
-	}
-	
-	export interface ITagsExtractor {
-		toList(): string[];
-	}
-}
+declare var Yaki; // TODO: find/create a *.d.ts definition file for yaki
+declare var franc; // TODO: find/create a *.d.ts definition file for franc
 
 /**
  * Calculations: 

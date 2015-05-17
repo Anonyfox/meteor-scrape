@@ -1,18 +1,44 @@
 /// <reference path="../../definitions/scrape.ts" />
 
-module Extract.Tags {
+module Extract {
 	
 	/**
-	 * Shorthand Constructors
+	 * Use different extraction algorithms, dependend on the 
+	 * input. 
+	 * 
+	 * For a given text-string, apply the algorithms of the 
+	 * Yaki lib to get a clean array of keywords. If input is 
+	 * a Cheerio DOM element, search for the "native" meta
+	 * keywords tag and use it's content.
 	 */
 	
-	export function fromString(str: string): ITagsExtractor {
-		var language = Calculate.Language.fromString(str);
-		var tags: string[] = Yaki(str, {language: language}).extract();
-		return new Tags(tags);
+	export function Tags(input: string | CheerioStatic): string [] {
+		if (!input) {
+			return [];
+		}
+		if (_.isString(input)) {
+			return fromString(<string>input);
+		} else {
+			return fromCheerio(<CheerioStatic>input);
+		}
 	}
 	
-	export function fromCheerio($: CheerioStatic): ITagsExtractor {
+	/**
+	 * Just use Yaki on a text string. 
+	 */
+	
+	function fromString(str: string): string[] {
+		var language = Calculate.Language.fromString(str);
+		var tags: string[] = Yaki(str, {language: language}).extract();
+		return tags;
+	}
+	
+	/**
+	 * Find the native keywords from the DOM and return them
+	 * (cleaned).
+	 */
+	
+	function fromCheerio($: CheerioStatic): string[] {
 		var str = $("meta[name='keywords']").attr("content");
 		if (str) {
 			var language = Calculate.Language.fromString(str);
@@ -22,28 +48,11 @@ module Extract.Tags {
 			} else {
 				tags = str.split(",");
 			}
-			return new Tags(Yaki(tags).clean());
-			
+			return Yaki(tags).clean();
 		} else {
-			return new Tags([]);
+			return []
 		}
 		
 	}
-	
-	/**
-	 * Returned Class
-	 */
-	
-	export class Tags implements ITagsExtractor {
-		
-		constructor(private data: string[]) {
-			// TODO: string cleaning and optimizations
-		}
-		
-		toList(): string[] {
-			return this.data;
-		}
-		
-	}
-	
+
 }

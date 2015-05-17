@@ -1,42 +1,50 @@
 /// <reference path="../../definitions/scrape.ts" />
 
-module Extract.Title {
+module Extract {
 	
 	var at = Npm.require("article-title");
 	
 	/**
-	 * Shorthand Constructors
+	 * Uses different extraction algorithms, dependend on the 
+	 * input. 
+	 * 
+	 * For a html-string, use the "article-title" lib 
+	 * to determine the true title of the document. If it's a 
+	 * Cheerio DOM element, extract from <title>, <h1>, ... . 
 	 */
 	
-	export function fromString(str: string): ITitleExtractor {
-		var title = at(str);
-		return new Title(title);
-	}
-	
-	export function fromCheerio($: CheerioStatic, native: boolean = false): ITitleExtractor {
-		var str: string;
-		if (native) {
-			str = $("title").first().text();
-		} else {
-			str = $("title,h1,h2,h3,h4,h5,h6").first().text();
+	export function Title(input: string | CheerioStatic): string {
+		if (!input) {
+			return "";
 		}
-		return new Title(str);
+		if (_.isString(input)) {
+			return fromString(<string>input);
+		} else {
+			return fromCheerio(<CheerioStatic>input);
+		}
 	}
 	
 	/**
-	 * Returned Class
+	 * Use the "article-title" lib to find the "true" title
+	 * from the given HTML string and strip out noise as much
+	 * as possible.
 	 */
 	
-	class Title implements ITitleExtractor {
-		
-		constructor(private data: string) {
-			// TODO: string cleaning and optimizations
-		}
-		
-		toString(): string {
-			return this.data;
-		}
-		
+	function fromString(str: string): string {
+		var title = at(str);
+		// TODO: string cleaning
+		return title;
+	}
+	
+	/**
+	 * Just grab the contents of the "<title>" tag, or use 
+	 * the headlines' text, without further guessing.
+	 */
+	
+	function fromCheerio($: CheerioStatic): string {
+		var str = $("title,h1,h2,h3,h4,h5,h6").first().text();
+		// TODO: string cleaning
+		return str;
 	}
 	
 }

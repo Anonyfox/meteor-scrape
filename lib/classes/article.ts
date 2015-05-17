@@ -46,16 +46,16 @@ module Parse.Article {
 		}
 		
 		private extractBasicData(): void {
-			this.title = Extract.Title.fromString(this.str).toString();
-			this.url = Extract.Link.fromCheerio(this.$, true).toString();
-			this.fullText = Extract.Fulltext.fromString(this.str).toString();
-			this.image = Extract.Image.fromCheerio(this.$).toString();
+			this.title = Extract.Title(this.str);
+			this.url = Extract.Link(this.$);
+			this.fullText = Extract.Fulltext(this.str);
+			this.image = Extract.Image(this.$);
 		}
 		
 		private extractAdvancedData(): void {
-			this.description = Extract.Description.fromString(this.fullText).toString();
+			this.description = Extract.Description(this.fullText);
 			this.language = Calculate.Language.fromString(this.fullText).code();
-			this.tags = Extract.Tags.fromString(this.fullText).toList();
+			this.tags = Extract.Tags(this.fullText);
 		}
 	}
 }

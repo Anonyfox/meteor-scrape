@@ -42,10 +42,10 @@ module Parse.Website {
 		}
 		
 		private extractBasicData(): void {
-			this.title = Extract.Title.fromCheerio(this.$, true).toString();
-			this.url = Extract.Link.fromCheerio(this.$, true).toString();
-			this.feeds = Extract.Feeds.fromCheerio(this.$).toList();
-			this.description = Extract.Description.fromCheerio(this.$).toString();
+			this.title = Extract.Title(this.$);
+			this.url = Extract.Link(this.$);
+			this.feeds = Extract.Feeds(this.$);
+			this.description = Extract.Description(this.$);
 		}
 		
 		private extractAdvancedData(): void {
