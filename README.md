@@ -181,6 +181,7 @@ This produces following output:
 - [ ] get it working on the client
 - [ ] image thumbnail creation
 - [ ] transform Favicon to Base64 String
+- [ ] Use [TSD](https://github.com/Definitelytyped/tsd#readme)
 
 ## License
 

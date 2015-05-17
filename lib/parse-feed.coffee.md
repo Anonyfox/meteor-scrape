@@ -1,6 +1,6 @@
 # ParseFeed
 This module is capable of parsing RSS and Atom feeds. Just give it a
-HTML string and you're ready to go. The following libraries are used for this:
+HTML string and you are ready to go. The following libraries are used for this:
 
     cheerio = Npm.require "cheerio"
 
@@ -29,7 +29,9 @@ fragile RegExps!
       feed.image.width = parseInt(Text.clean $('image width').first().text() or "")
       feed.image.height = parseInt(Text.clean $('image height').first().text() or "")
 
-      feed.items = $('item,entry').map((i,e) -> mapItem e).get()
+      feed.items = $('item,entry').map((i,e) ->
+        new Parse.Feed.FeedItem($(e))
+      )
       return feed
 
 This function takes the DOM element of a single feed item and extracts the

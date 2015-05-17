@@ -17,7 +17,8 @@ without any further parsing
       feed: (url) ->
         try
           xml = ScrapeRequest.fetch url
-          data = ParseFeed xml
+          # data = ParseFeed xml
+          data = new Parse.Feed xml
           obj = correctFeedItems url, data
           return obj
         catch e
