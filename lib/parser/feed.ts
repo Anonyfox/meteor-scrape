@@ -30,7 +30,7 @@ module Parse.Feed {
 		public docs: string;
 		public managingEditor: string;
 		public webMaster: string;
-		public items: IFeedItem[] = [];
+		public items: FeedItem[] = [];
 		private $: CheerioStatic;
 		
 		constructor(private str: string) {
@@ -39,7 +39,7 @@ module Parse.Feed {
 			this.description = Extract.Description(this.$);
 			this.url = Extract.Link(this.$);
 			this.pubDate = Extract.PubDate(this.$);
-			this.language = Calculate.Language.fromString(this.title + " " + this.description).code();
+			this.language = Calculate.Language(this.title + " " + this.description);
 			this.extractLastBuildDate();
 			this.extractDocs();
 			this.extractManagingEditor();

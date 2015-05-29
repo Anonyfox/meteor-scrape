@@ -4,7 +4,7 @@ module Parse.Feed {
 	
 	var cheerio = Npm.require("cheerio");
 	
-	export class FeedItem implements IFeedItem {
+	export class FeedItem implements BasicInfo, Tagged {
 		public title: string;
 		public name: string; // alias for title
 		public description: string;
@@ -14,28 +14,29 @@ module Parse.Feed {
 		public pubDate: Date;
 		public image: string;
 		public language: string;
-		public tags: string[];
-		public nativeTags: string[];
+		public tags: string[] = [];
+    public keywords: string[];
+		public nativeTags: string[] = [];
+    public nativeKeywords: string[];
 		
 		constructor(private $: CheerioStatic) {
-			this.extractBasicData();
-			this.extractAdvancedData();
-			// also declare a few aliases for convenient usage:
-			this.name = this.title;
-			this.summary = this.description;
-			this.link = this.url;
+			this.extractBasicInfo();
+			this.extractTaggedInfo();
 		}
 		
-		private extractBasicData(): void {
+		private extractBasicInfo(): void {
 			this.title = Extract.Title(this.$);
+      this.name = this.title;
 			this.description = Extract.Description(this.$);
+      this.summary = this.description;
 			this.url = Extract.Link(this.$);
+      this.link = this.url;
 			this.pubDate = Extract.PubDate(this.$);
+      this.language = Calculate.Language(this.title + " " + this.description);
 			this.extractImage();
 		}
 		
-		private extractAdvancedData(): void {
-			this.language = Calculate.Language.fromString(this.title + " " + this.description).code();
+		private extractTaggedInfo(): void {
 			this.extractNativeTags();
 			this.extractTags();
 		}
@@ -84,6 +85,7 @@ module Parse.Feed {
 				});
 			});
 			this.nativeTags = tagList;
+      this.nativeKeywords = this.nativeTags;
 			// TODO: test this stuff!
 		}
 		
@@ -91,6 +93,7 @@ module Parse.Feed {
 			var sampleString: string = this.title + " " + this.description;
 			var tags: string[] = Yaki(sampleString, {language: this.language}).extract();
 			this.tags = _.union(this.nativeTags, tags);
+      this.keywords = this.tags;
 		}
 	}
 	

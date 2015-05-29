@@ -1,4 +1,4 @@
-/// <reference path="../lib/definitions/scrape.ts" />
+/// <reference path="test-definitions.ts" />
 
 console.log("testing!!!");
 

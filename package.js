@@ -1,5 +1,10 @@
 /* global Npm */
 /* global Package */
+
+/**
+ * Scrape Package Information
+ */
+
 Package.describe({
   name: 'anonyfox:scrape',
   version: '0.1.0',
@@ -7,6 +12,10 @@ Package.describe({
   git: 'https://github.com/Anonyfox/meteor-scrape',
   documentation: 'README.md'
 });
+
+/**
+ * External Libraries from NPM
+ */
 
 Npm.depends({
   "request": "2.53.0",
@@ -23,7 +32,13 @@ Npm.depends({
   "nlpsum":"0.1.15"
 });
 
+/**
+ * Package Files and Dependencies
+ */
+
 Package.onUse(function(api) {
+  
+  // required meteor packages
   api.versionsFrom('1.0');
   api.use([
     'coffeescript',
@@ -33,13 +48,14 @@ Package.onUse(function(api) {
     'froatsnook:request@2.53.2',
     'nefiltari:yaki@0.1.5',
     'wizonesolutions:underscore-string@1.0.0',
-//    'meteortypescript:typescript-libs@1.1.0',
     'mologie:typescript@0.0.9',
-//    'meteortypescript:compiler@2.0.8',
     'momentjs:moment@2.10.3',
   ],['server']);
+  
+  // expose the Scrape symbol to hosting meteor apps
   api.export(['Scrape', 'Parse'],['server']);
-  // api.export(['ScrapeClient'],['client']);
+  
+  // package files
   api.addFiles([
     // [refactored] TypeScript files:
     'lib/definitions/scrape.ts',
@@ -53,32 +69,37 @@ Package.onUse(function(api) {
     'lib/modules/extract/favicon.ts',
     'lib/modules/extract/image.ts',
     'lib/modules/extract/tags.ts',
-    'lib/classes/feed_item.ts',
-    'lib/classes/feed.ts',
-    'lib/classes/website.ts',
-    'lib/classes/article.ts',
+    'lib/modules/extract/references.ts',
+    'lib/parser/feed_item.ts',
+    'lib/parser/feed.ts',
+    'lib/parser/website.ts',
+    'lib/parser/article.ts',
     // [deprecated] Coffeescript files: 
-//    'lib/link.coffee.md',
     'lib/text.coffee.md',
     'lib/scrape-request.coffee.md',
-    'lib/parse-website.coffee.md',
-    'lib/parse-feed.coffee.md',
     'lib/parse-wikipedia.coffee.md',
   ], ['server']);
-//  api.addFiles("scrape-client.coffee.md",'client');
   api.addFiles("scrape-server.coffee.md","server");
   api.addFiles("globals.js","server");
 });
 
+/**
+ * Package Test Files
+ */
+
 Package.onTest(function(api) {
+  
+  // meteor packages
   api.use([
     'tinytest',
     'coffeescript',
     'underscore',
     'mologie:typescript@0.0.9',
+    'anonyfox:scrape'
   ],['server']);
-  api.use('anonyfox:scrape');
-  api.addFiles([ // sample data
+  
+  // sample data
+  api.addFiles([
     'tests/sampledata/sites/venturebeat-website.html',
     'tests/sampledata/sites/focus-website.html',
     'tests/sampledata/sites/bbc-article.html',
@@ -88,11 +109,13 @@ Package.onTest(function(api) {
     'tests/sampledata/feeds/spiegel-feed.xml',
     'tests/sampledata/feeds/rtv-feed.xml'
   ], 'server', {isAsset: true});
+  
 //  api.addFiles('test.coffee.md');
+  // individual test files, toggle to speed up testing during development
   api.addFiles([
     'tests/helper/samples.ts',
     'tests/categories/feeds.coffee.md',
     'tests/categories/websites.coffee.md',
-    'tests/categories/articles.coffee.md',
+    'tests/categories/articles.ts',
   ], 'server');
 });

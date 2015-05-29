@@ -9,7 +9,3 @@
  */
  
  declare var Tinytest; // TODO: create a *.d.ts Tinytest
- 
- module UnitTests {
-	 
- }

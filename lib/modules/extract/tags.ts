@@ -28,7 +28,7 @@ module Extract {
 	 */
 	
 	function fromString(str: string): string[] {
-		var language = Calculate.Language.fromString(str);
+		var language = Calculate.Language(str);
 		var tags: string[] = Yaki(str, {language: language}).extract();
 		return tags;
 	}
@@ -41,7 +41,7 @@ module Extract {
 	function fromCheerio($: CheerioStatic): string[] {
 		var str = $("meta[name='keywords']").attr("content");
 		if (str) {
-			var language = Calculate.Language.fromString(str);
+			var language = Calculate.Language(str);
 			var tags: string[];
 			if (/;/.test(str)) {
 				tags = str.split(";");

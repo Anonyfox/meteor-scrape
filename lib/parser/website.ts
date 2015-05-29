@@ -8,11 +8,11 @@ module Parse.Website {
 	 * Shorthand Constructors
 	 */
 	 
-	export function fromString(str: string): IWebsite {
+	export function fromString(str: string): WebsiteObject {
 		return new WebsiteObject(str);
 	}
 		
-	export function fromUrl(url: string): IWebsite {
+	export function fromUrl(url: string): WebsiteObject {
 		return new WebsiteObject(url);
 	}
 	 
@@ -20,7 +20,7 @@ module Parse.Website {
 	 * The returned Class
 	 */
 	 
-	export class WebsiteObject implements IWebsite {
+	export class WebsiteObject implements BasicInfo, WebsiteInfo {
 		
 		public title: string;
 		public name: string; //alias for title
@@ -31,26 +31,33 @@ module Parse.Website {
 		public image: string;
 		public language: string;
 		public favicon: string;
+		public pubDate: Date;
 		public references: string[] = [];
 		public feeds: string[] = [];
 		private $: CheerioStatic;
 		
 		constructor(private str: string) {
 			this.$ = cheerio.load(str, {xmlMode: true});
-			this.extractBasicData();
-			this.extractAdvancedData();
+			this.extractBasicInfo();
+			this.extractWebsiteInfo();
 		}
 		
-		private extractBasicData(): void {
+		private extractBasicInfo(): void {
 			this.title = Extract.Title(this.$);
+			this.name = this.title;
 			this.url = Extract.Link(this.$);
-			this.feeds = Extract.Feeds(this.$);
+			this.link = this.url;
 			this.description = Extract.Description(this.$);
+			this.summary = this.description;
+			var inspectableText = (this.title + " " + this.description);
+			this.language = Calculate.Language(inspectableText);
+			this.pubDate = Extract.PubDate(this.$);
 		}
 		
-		private extractAdvancedData(): void {
-			var inspectableText = (this.title + " " + this.description);
-			this.language = Calculate.Language.fromString(inspectableText).code();
+		private extractWebsiteInfo(): void {
+			this.feeds = Extract.Feeds(this.$);
+			this.references = Extract.References(this.$);
+			this.favicon = Extract.Favicon(this.$);
 		}
 	}
 }

@@ -53,6 +53,10 @@ module Extract {
 	
 	function fromCheerio($: CheerioStatic): Date {
 		var dateString: string = $("pubDate,pubdate,updated").first().text();
+		if (!dateString) {
+			// try google microdata markup
+			dateString = $("time[itemprop='startDate']").attr("datetime");
+		}
 		return fromString(dateString);
 	}
 	
